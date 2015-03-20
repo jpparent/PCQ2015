@@ -37,7 +37,7 @@ public class ControllerManager : MonoBehaviour
     void Awake()
     {
         // Player Controlls
-        tackleRate = 5f;
+        tackleRate = 2f;
         nextTackle = 0f;
 
         // Vibration settings
@@ -50,7 +50,7 @@ public class ControllerManager : MonoBehaviour
 
         if (isHat)
         {
-         gameObject.tag = "PlayerHat";
+            gameObject.tag = "PlayerHat";
         }
         else
         {
@@ -119,7 +119,7 @@ public class ControllerManager : MonoBehaviour
             rightMotor = vibrationItensity;
             canVibrate = false;
         }
-        
+
         leftMotor = Mathf.Lerp(leftMotor, 0f, Time.deltaTime * vibrationDuration);
         rightMotor = Mathf.Lerp(rightMotor, 0f, Time.deltaTime * vibrationDuration);
 
@@ -170,12 +170,13 @@ public class ControllerManager : MonoBehaviour
         if (!isHat)
             tackle = XCI.GetButton(XboxButton.X) || XCI.GetButton(XboxButton.A);
 
-        if (tackle && Time.time > nextTackle) {
+        if (tackle && Time.time > nextTackle)
+        {
 #if DEBUG
-        
+
             Debug.Log("I haz tackled");
 #endif
-            nextTackle = Time.time + tackleRate;    
+            nextTackle = Time.time + tackleRate;
         }
     }
 
