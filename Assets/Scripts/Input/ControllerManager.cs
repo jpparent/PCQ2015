@@ -9,8 +9,6 @@ public class ControllerManager : MonoBehaviour
     public enum PlayerNumber { player_1, player_2, player_3, player_4 };
 
     public float moveSpeed = 20f;
-    public float moveSpeedModifier;
-    public float moveSpeedModifierDuration;
     public PlayerNumber playerNum;
     public int controllerNum;
     public int hotspot;
@@ -29,9 +27,6 @@ public class ControllerManager : MonoBehaviour
     public float rightMotor;
     public float vibrationItensity;
     private bool canVibrate;
-
-    public Animator anim;
-    private Vector3 moveDir;
 
     // Use this for initialization
     void Awake()
@@ -56,8 +51,6 @@ public class ControllerManager : MonoBehaviour
         {
             gameObject.tag = "Player";
         }
-
-        moveDir = Vector3.zero;
 
         // Set Player controllers
         switch (playerNum)
@@ -107,10 +100,10 @@ public class ControllerManager : MonoBehaviour
 
 
         float newPosX = newPos.x + (axisX * moveSpeed * Time.deltaTime);
-        float newPosZ = newPos.y + (axisY * moveSpeed * Time.deltaTime);
+        float newPosZ = newPos.z + (axisY * moveSpeed * Time.deltaTime);
 
-        newPos = new Vector2(newPosX, newPosZ);
-        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
+        newPos = new Vector3(newPosX, newPos.y, newPosZ);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
         transform.position = newPos;
     }
 
@@ -171,10 +164,10 @@ public class ControllerManager : MonoBehaviour
         // Assigner a A ou X... A verifier.
         if ((XCI.GetButton(XboxButton.X, controllerNum) || XCI.GetButton(XboxButton.A, controllerNum)) && !isHat && Time.time > nextTackle)
         {
-         
-                gameObject.GetComponent<Chase>().Tackling();
-                nextTackle = Time.time + tackleRate;
-       
+
+            gameObject.GetComponent<Chase>().Tackling();
+            nextTackle = Time.time + tackleRate;
+
 
 #if DEBUG
 
@@ -186,11 +179,5 @@ public class ControllerManager : MonoBehaviour
     void SetHat()
     {
         isHat = true;
-    }
-
-    // Reinitialize all
-    void Reset()
-    {
-        isHat = false;
     }
 }
