@@ -118,7 +118,7 @@ public class ControllerManager : MonoBehaviour
         float newPosZ = newPos.z + (axisY * moveSpeed * Time.deltaTime);
 
         newPos = new Vector3(newPosX, newPos.y, newPosZ);
-        transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
+        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
         if (Mathf.Abs(axis) > 0.2f)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);

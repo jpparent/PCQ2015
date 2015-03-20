@@ -36,13 +36,13 @@ public class Chase : MonoBehaviour
         Debug.Log("start tackle");
         Animator anim = gameObject.GetComponent<Animator>();
         anim.SetBool("isKicking", true);
-        transform.position = newPos;
+        //transform.position = newPos;
 
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("isKicking", false);
         Debug.Log("done tackle");
 
-        transform.position = oldPos;
+       // transform.position = oldPos;
         isTackling = false;
     }
 
