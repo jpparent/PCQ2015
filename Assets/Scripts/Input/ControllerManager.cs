@@ -23,6 +23,7 @@ public class ControllerManager : MonoBehaviour
     public float tackleRate;
 
     // Vibration Modifiers
+    public float deadzone;
     public float vibrationDuration;
     public float leftMotor;
     public float rightMotor;
@@ -36,18 +37,26 @@ public class ControllerManager : MonoBehaviour
     void Awake()
     {
         // Player Controlls
-        isHat = false;
-        tackleRate = 5f;
+        tackleRate = 2f;
         nextTackle = 0f;
 
         // Vibration settings
+        deadzone = .95f;
         hotspot = 2;
-        vibrationItensity = .5f;
+        vibrationItensity = .65f;
         vibrationDuration = 3;
         leftMotor = 0f;
         rightMotor = 0f;
 
-        gameObject.tag = "Player";
+        if (isHat)
+        {
+            gameObject.tag = "PlayerHat";
+        }
+        else
+        {
+            gameObject.tag = "Player";
+        }
+
         moveDir = Vector3.zero;
 
         // Set Player controllers
@@ -120,6 +129,7 @@ public class ControllerManager : MonoBehaviour
     // Methode pour verifier le spot a aller.
     void HatPlayer()
     {
+
         float axisX = XCI.GetAxis(XboxAxis.RightStickX);
         float axisY = XCI.GetAxis(XboxAxis.RightStickY);
 
@@ -127,32 +137,28 @@ public class ControllerManager : MonoBehaviour
         switch (hotspot)
         {
             case 1:
-                if (axisY > .2f)
-                    VibrationManager();
+                if (axisY > deadzone)
+                    canVibrate = true;
                 break;
             case 2:
-                if (axisY < -.2f)
-                    VibrationManager();
+                if (axisY < -deadzone)
+                    canVibrate = true;
                 break;
             case 3:
-                if (axisX > .2f)
-                    VibrationManager();
+                if (axisX > deadzone)
+                    canVibrate = true;
                 break;
             case 4:
-                if (axisX < -.2f)
-                    VibrationManager();
+                if (axisX < -deadzone)
+                    canVibrate = true;
                 break;
         }
-
-
-
-
-
 
         if (axisX > .2f || axisX < -.2f || axisY > .2f || axisY < -.2f)
         {
 #if DEBUG
             Debug.Log("I am hat");
+            Debug.Log("Axis X: " + axisX + " Axis Y: " + axisY);
 #endif
         }
     }
@@ -164,12 +170,13 @@ public class ControllerManager : MonoBehaviour
         if (!isHat)
             tackle = XCI.GetButton(XboxButton.X) || XCI.GetButton(XboxButton.A);
 
-        if (tackle && Time.time > nextTackle) {
+        if (tackle && Time.time > nextTackle)
+        {
 #if DEBUG
-        
+
             Debug.Log("I haz tackled");
 #endif
-            nextTackle = Time.time + tackleRate;    
+            nextTackle = Time.time + tackleRate;
         }
     }
 
