@@ -37,7 +37,7 @@ public class ControllerManager : MonoBehaviour
 
         // Vibration settings
         deadzone = .95f;
-        hotspot = 2;
+        hotspot = 1;
         vibrationItensity = .65f;
         vibrationDuration = 3;
         leftMotor = 0f;

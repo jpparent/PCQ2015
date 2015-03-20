@@ -11,3 +11,5 @@ EditorBuildSettings:
     path: Assets/Scenes/GabTest.unity
   - enabled: 1
     path: Assets/Scenes/JP_tests.unity
+  - enabled: 1
+    path: Assets/Scenes/FirstTestScene.unity

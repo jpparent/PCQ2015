@@ -5,35 +5,69 @@ public class HotSpot : MonoBehaviour {
 
     
     public bool isActive = false;
-    public float scoreIncreaseRate = 1f; // one second delay between score increment
-    private float nextScoreIncrease = 0f;
-    public int scoreValue = 100;    // staying inside the hotspot for [delayBetweenScoreIncrement] seconds increment the hat's score by this amount
 
-    public GameObject gameManager;
+    float timeInterval = 30f;
+    float timeBeforeChange ; 
+    public int bonusScore = 100;    // Staying until the end inside the hotspot grant the hat with this bonus.
+
+    GameManager GManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
 
 	// Use this for initialization
 	void Start () {
-        gameManager = GameObject.FindGameObjectWithTag("GameController");
+        timeBeforeChange = Time.time + timeInterval;
+    
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	void FixedUpdate () {
+        if (Time.time >= timeBeforeChange) 
+        {
+            ChangeHotspot();
+        }
 
 	}
 
-    void OnTriggerStay( Collider other){
-    
-        if( isActive && other.tag == "PlayerHat" && Time.time > nextScoreIncrease ){
-
-            nextScoreIncrease = Time.time + scoreIncreaseRate;
-
-            Debug.Log("score increase!!! YOU RULE!");
-
-            gameManager.GetComponent<GameManager>().addScoreToPlayer(gameManager.GetComponent<GameManager>().getHat()-1,1);
-
+    void OnTriggerEnter(Collider other) {
+        if (isActive && other.tag == "PlayerHat")
+        {
+            timeInterval = 10f;
+            timeBeforeChange = Time.time + timeInterval;
         }
     }
 
+    void OnTriggerStay( Collider other){
+        if( isActive && other.tag == "PlayerHat" ){
 
+            if (Time.time >= timeBeforeChange) 
+            {
+                GivePoint(bonusScore);
+            }
+            else if (timeBeforeChange > 0 && Time.time < timeBeforeChange) {
+                GivePoint(1);
+            }
+        }
+    }
+
+    void OnTriggerExit( Collider other) 
+    {
+        if (isActive && other.tag == "PlayerHat")
+        { 
+            timeInterval = 30f;
+            ChangeHotspot();
+           
+        }
+       
+    }
+
+    void ChangeHotspot() 
+    {
+        timeBeforeChange = Time.time + timeInterval;
+        GameObject.FindGameObjectWithTag("RoundManager").GetComponent<RoundManager>().ChangeHotspot();
+    }
+
+    void GivePoint(int point) 
+    {
+        GManager.addScoreToPlayer(GManager.getHat() - 1, point);
+
+    }
 }
