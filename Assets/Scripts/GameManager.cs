@@ -6,11 +6,15 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 	
 	public Text[] scoreArr;
-	public Text scoreText1;
-	public Text scoreText2;
-	public Text scoreText3;
-	public Text scoreText4;
-	public int[] scoreTrack;
+	public Text   scoreText1;
+	public Text   scoreText2;
+	public Text   scoreText3;
+	public Text   scoreText4;
+	public int[]  scoreTrack;
+	public Text   timerText;
+	public int    timerCount;
+	public string timerString;
+	public const int MAX_TIMER = 120;
 
     public HotSpot[] hotspots;
     public int activeHotspotIndex = 1;
@@ -26,9 +30,10 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		scoreArr = new Text[4] {scoreText1, scoreText2, scoreText3, scoreText4};
-		scoreTrack = new int[4] {11, 2, 0, 0};
-		//setScore (1);
+		scoreTrack = new int[4] {0, 0, 0, 0};
 		resetScore();
+		timerCount = MAX_TIMER;
+		StartCoroutine (Timer ());
 
         // activate a hotspot randomly
         activeHotspotIndex = Random.Range(0, hotspots.Length);
@@ -58,6 +63,15 @@ public class GameManager : MonoBehaviour {
 
         }
 
+	}
+	
+	IEnumerator Timer() {  //triggers end of turn for hat
+		while (timerCount>0) {
+			yield return new WaitForSeconds(1.0f);
+			timerCount--;
+			//timerString = timerString.Format("{0:0}:{1:00}", Mathf.Floor(timerCount/60), timerCount % 60);
+			timerText.text = "Timer: " + timerCount;
+		} //timer==0 -> end of turn
 	}
 	
 	public void addScoreToPlayer(int currPlayer, int newScoreValue) {
