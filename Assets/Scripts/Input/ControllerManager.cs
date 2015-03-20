@@ -96,9 +96,11 @@ public class ControllerManager : MonoBehaviour
         Vector3 newPos = transform.position;
         float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controllerNum);
         float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controllerNum);
-        float axis = Mathf.Abs(axisX) > Mathf.Abs(axisY) ? axisX : axisY;
-
-
+        
+        // Variable afin de verifier si le stick est activer, peu importe la direction de l'axe
+        // A utiliser avec le mecanim
+        //float axis = Mathf.Abs(axisX) > Mathf.Abs(axisY) ? axisX : axisY;
+                
         float newPosX = newPos.x + (axisX * moveSpeed * Time.deltaTime);
         float newPosZ = newPos.z + (axisY * moveSpeed * Time.deltaTime);
 

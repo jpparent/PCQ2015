@@ -86,8 +86,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  moveSpeedModifier: 0
-  moveSpeedModifierDuration: 0
   playerNum: 0
   controllerNum: 0
   hotspot: 0
@@ -99,7 +97,6 @@ MonoBehaviour:
   leftMotor: 0
   rightMotor: 0
   vibrationItensity: 0
-  anim: {fileID: 0}
 --- !u!136 &13636364
 CapsuleCollider:
   m_ObjectHideFlags: 1
