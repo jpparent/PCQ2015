@@ -46,7 +46,7 @@ public class ControllerManager : MonoBehaviour
 
         // Vibration settings
         deadzone = .95f;
-        hotspot = 2;
+        hotspot = GameObject.FindGameObjectWithTag("RoundManager").GetComponent<RoundManager>().hotspotIndex[0];
         vibrationItensity = .65f;
         vibrationDuration = 3;
         leftMotor = 0f;
@@ -161,11 +161,11 @@ public class ControllerManager : MonoBehaviour
                     canVibrate = true;
                 break;
             case 2:
-                if (axisY < -deadzone)
+                if (axisX > deadzone)
                     canVibrate = true;
                 break;
             case 3:
-                if (axisX > deadzone)
+                if (axisY < -deadzone)
                     canVibrate = true;
                 break;
             case 4:

@@ -41,9 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isActive: 1
-  scoreIncreaseRate: 1
-  scoreValue: 100
-  gameManager: {fileID: 0}
+  bonusScore: 100
 --- !u!135 &13589816
 SphereCollider:
   m_ObjectHideFlags: 1
