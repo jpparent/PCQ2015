@@ -4,8 +4,6 @@ using System.Collections;
 public class HotSpot : MonoBehaviour {
 
     
-    private bool isHatInRange = false;
-
     public bool isActive = false;
     public float scoreIncreaseRate = 1f; // one second delay between score increment
     private float nextScoreIncrease = 0f;
