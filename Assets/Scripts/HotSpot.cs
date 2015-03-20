@@ -10,19 +10,29 @@ public class HotSpot : MonoBehaviour {
     float timeBeforeChange ; 
     public int bonusScore = 100;    // Staying until the end inside the hotspot grant the hat with this bonus.
 
-    GameManager GManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+    GameManager GManager ;
 
 	// Use this for initialization
 	void Start () {
+        GManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         timeBeforeChange = Time.time + timeInterval;
     
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
         if (Time.time >= timeBeforeChange) 
         {
             ChangeHotspot();
+        }
+
+        if (isActive)
+        {
+            GetComponent<ParticleSystem>().enableEmission = true;
+        }
+        else {
+            GetComponent<ParticleSystem>().enableEmission = false;
+        
         }
 
 	}
@@ -41,6 +51,7 @@ public class HotSpot : MonoBehaviour {
             if (Time.time >= timeBeforeChange) 
             {
                 GivePoint(bonusScore);
+                ChangeHotspot();
             }
             else if (timeBeforeChange > 0 && Time.time < timeBeforeChange) {
                 GivePoint(1);
@@ -50,17 +61,18 @@ public class HotSpot : MonoBehaviour {
 
     void OnTriggerExit( Collider other) 
     {
+        
+       
         if (isActive && other.tag == "PlayerHat")
-        { 
-            timeInterval = 30f;
+        {    
             ChangeHotspot();
-           
         }
        
     }
 
     void ChangeHotspot() 
-    {
+    {   
+        timeInterval = 30f;
         timeBeforeChange = Time.time + timeInterval;
         GameObject.FindGameObjectWithTag("RoundManager").GetComponent<RoundManager>().ChangeHotspot();
     }

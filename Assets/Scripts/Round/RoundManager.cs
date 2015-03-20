@@ -58,7 +58,7 @@ public class RoundManager : MonoBehaviour {
             htspt.isActive = false;
         }
         hotspots[hotspotIndex[activeHotspotIndex]].isActive = true;
-        GameObject.FindGameObjectWithTag("PlayerHat").GetComponent<ControllerManager>().hotspot = hotspotIndex[activeHotspotIndex];
+        GameObject.FindGameObjectWithTag("PlayerHat").GetComponent<ControllerManager>().hotspot = hotspotIndex[activeHotspotIndex]+1;
     }
 
     void ShuffleHotspots() {
