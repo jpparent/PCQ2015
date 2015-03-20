@@ -25,10 +25,12 @@ public class GameManager : MonoBehaviour {
     public float hotspotCycleDelay = 5f; // delay between to hotspot's activation
     private float nextHotspotCycle;
 
-
+    //Round Data
+    public int round;
+    int[] hatRound;
 	
 	// Use this for initialization
-	void Start() {
+	void Awake() {
 		scoreArr = new Text[4] {scoreText1, scoreText2, scoreText3, scoreText4};
 		scoreTrack = new int[4] {0, 0, 0, 0};
 		resetScore();
@@ -38,6 +40,11 @@ public class GameManager : MonoBehaviour {
         // activate a hotspot randomly
         activeHotspotIndex = Random.Range(0, hotspots.Length);
         hotspots[activeHotspotIndex].isActive = true;
+
+        if (round == 1) { 
+        hatRound = new int[4] { 1, 2, 3, 4 };
+        ShuffleHat();
+        }
 
 	}
 	
@@ -88,4 +95,28 @@ public class GameManager : MonoBehaviour {
 			setScore (i);
 		}
 	}
+
+    void ShuffleHat()
+    {
+        for (int i = 0; i < hatRound.Length; i++)
+        {
+            int j = Random.Range(0, i);
+            int source = hatRound[i];
+            if (j != i)
+            {
+                hatRound[i] = hatRound[j];
+            }
+            hatRound[j] = source;
+        }
+    }
+
+    int getHat()
+    {
+        return hatRound[round];
+    }
+
+    void NextRound()
+    {
+        round++;
+    }
 }

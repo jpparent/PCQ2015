@@ -8,10 +8,8 @@ public class RoundManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
         round = 1;
         ShuffleHat();
-
 	}
 	
 	// Update is called once per frame
