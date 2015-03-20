@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour {
     public Text timerText;
 	public int[]  scoreTrack;
 
-    public GameObject RoundManager;
+    public GameObject RManager;
 
     //Round Data
     public int round;
@@ -92,13 +92,13 @@ public class GameManager : MonoBehaviour {
                Destroy(go);
            }
        }
-
+        CreateRoundManager();
        Application.LoadLevelAdditiveAsync("GabTest");
     }
 
     void CreateRoundManager() 
     {
-        RoundManager.GetComponent<RoundManager>().SetTimerText(timerText);
-        Instantiate(RoundManager);   
+        RManager.GetComponent<RoundManager>().SetTimerText(timerText);
+      GameObject RM = Instantiate(RManager) as GameObject;   
     }
 }

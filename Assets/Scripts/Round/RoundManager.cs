@@ -24,6 +24,8 @@ public class RoundManager : MonoBehaviour {
 	void Start () {
 
         hotspots = GameObject.FindGameObjectsWithTag("Hotspot");
+        timerCount = MAX_TIMER;
+        StartCoroutine(Timer());
         StartRound();
     
     
@@ -58,8 +60,7 @@ public class RoundManager : MonoBehaviour {
 
     void StartRound(){
 
-        timerCount = MAX_TIMER;
-        StartCoroutine(Timer());
+       
 
 
         // activate a hotspot randomly
