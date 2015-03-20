@@ -9,13 +9,13 @@ public class ControllerManager : MonoBehaviour
     public enum PlayerNumber { player_1, player_2, player_3, player_4 };
 
     public float moveSpeed = 20f;
-    public float moveSpeedModifier;
-    public float moveSpeedModifierDuration;
     public PlayerNumber playerNum;
     public int controllerNum;
     public int hotspot;
 
     // set controller number pour le hat
+    public Chase chase;
+    public Hat hat;
     public bool isHat;
 
     // cooldown de tackle
@@ -29,9 +29,6 @@ public class ControllerManager : MonoBehaviour
     public float rightMotor;
     public float vibrationItensity;
     private bool canVibrate;
-
-    public Animator anim;
-    private Vector3 moveDir;
 
     // Use this for initialization
     void Awake()
@@ -51,13 +48,13 @@ public class ControllerManager : MonoBehaviour
         if (isHat)
         {
             gameObject.tag = "PlayerHat";
+            hat = gameObject.AddComponent<Hat>() as Hat;
         }
         else
         {
             gameObject.tag = "Player";
+            chase = gameObject.AddComponent<Chase>() as Chase;
         }
-
-        moveDir = Vector3.zero;
 
         // Set Player controllers
         switch (playerNum)
@@ -89,9 +86,13 @@ public class ControllerManager : MonoBehaviour
     void Update()
     {
         if (isHat)
+        {
             HatPlayer();
-
-        ChaseTeam();
+        }
+        else
+        {
+            ChaseTeam();
+        }
     }
 
     void LeftAxisManager()
@@ -99,17 +100,23 @@ public class ControllerManager : MonoBehaviour
         Vector3 newPos = transform.position;
         float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controllerNum);
         float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controllerNum);
+        
+        // Variable afin de verifier si le stick est activer, peu importe la direction de l'axe
+        // A utiliser avec le mecanim
         float axis = Mathf.Abs(axisX) > Mathf.Abs(axisY) ? axisX : axisY;
-
-
+                
         float newPosX = newPos.x + (axisX * moveSpeed * Time.deltaTime);
-        float newPosZ = newPos.y + (axisY * moveSpeed * Time.deltaTime);
+        float newPosZ = newPos.z + (axisY * moveSpeed * Time.deltaTime);
 
-        newPos = new Vector2(newPosX, newPosZ);
-        //transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
+        newPos = new Vector3(newPosX, newPos.y, newPosZ);
+        if (Mathf.Abs(axis) > 0.2f)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
+        }
+        
+        Debug.Log(Mathf.Atan2(axisX, axisY));
         transform.position = newPos;
     }
-
 
     void VibrationManager()
     {
@@ -166,28 +173,22 @@ public class ControllerManager : MonoBehaviour
     void ChaseTeam()
     {
         // Assigner a A ou X... A verifier.
-        bool tackle = false;
-        if (!isHat)
-            tackle = XCI.GetButton(XboxButton.X) || XCI.GetButton(XboxButton.A);
-
-        if (tackle && Time.time > nextTackle)
+        if ((XCI.GetButton(XboxButton.X, controllerNum) || XCI.GetButton(XboxButton.A, controllerNum)) && !isHat && Time.time > nextTackle)
         {
+
+            gameObject.GetComponent<Chase>().Tackling();
+            nextTackle = Time.time + tackleRate;
+
+
 #if DEBUG
 
             Debug.Log("I haz tackled");
 #endif
-            nextTackle = Time.time + tackleRate;
         }
     }
 
     void SetHat()
     {
         isHat = true;
-    }
-
-    // Reinitialize all
-    void Reset()
-    {
-        isHat = false;
     }
 }

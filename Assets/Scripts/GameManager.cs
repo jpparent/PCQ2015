@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using XboxCtrlrInput;
+
 
 public class GameManager : MonoBehaviour {
 	
@@ -9,34 +11,49 @@ public class GameManager : MonoBehaviour {
 	public Text   scoreText2;
 	public Text   scoreText3;
 	public Text   scoreText4;
+    public Text timerText;
 	public int[]  scoreTrack;
-	public Text   timerText;
-	public int    timerCount;
-	public string timerString;
-	public const int MAX_TIMER = 120;
+
+    public GameObject RManager;
+
+    //Round Data
+    public int round;
+  public int[] hatRound = {1, 2, 3, 4};
 	
 	// Use this for initialization
-	void Start() {
+	void Awake() {
 		scoreArr = new Text[4] {scoreText1, scoreText2, scoreText3, scoreText4};
 		scoreTrack = new int[4] {0, 0, 0, 0};
 		resetScore();
-		timerCount = MAX_TIMER;
-		StartCoroutine (Timer ());
+
+        ShuffleHat();
+
+
 	}
 	
 	// Update is called once per frame
 	void Update() {
-		
+
+        
+
+        if (XCI.GetButtonDown(XboxButton.B)) {
+
+            NextRound();
+        }
+
+        if (round > 4) 
+        {
+            round = 1;
+        }
+        if (round <= 4 && round >= 1)
+        {
+            setScore(getHat()-1);
+            Debug.Log(getHat());
+        }
+
 	}
 	
-	IEnumerator Timer() {  //triggers end of turn for hat
-		while (timerCount>0) {
-			yield return new WaitForSeconds(1.0f);
-			timerCount--;
-			//timerString = timerString.Format("{0:0}:{1:00}", Mathf.Floor(timerCount/60), timerCount % 60);
-			timerText.text = "Timer: " + timerCount;
-		} //timer==0 -> end of turn
-	}
+	
 	
 	public void addScoreToPlayer(int currPlayer, int newScoreValue) {
 		scoreTrack[currPlayer] += newScoreValue;
@@ -52,4 +69,47 @@ public class GameManager : MonoBehaviour {
 			setScore (i);
 		}
 	}
+
+    void ShuffleHat()
+    {
+        for (int i = 0; i < hatRound.Length; i++)
+        {
+            int j = Random.Range(0, i);
+            int source = hatRound[i];
+            if (j != i)
+            {
+                hatRound[i] = hatRound[j];
+            }
+            hatRound[j] = source;
+        }
+    }
+
+    public int getHat()
+    {
+        return hatRound[round-1];
+    }
+
+    public void NextRound()
+    {
+        round++;
+        
+       GameObject[] AllSceneObjects = GameObject.FindObjectsOfType<GameObject>();
+
+       foreach (GameObject go in AllSceneObjects) {
+           if (go.activeInHierarchy && go.gameObject.tag != "GameController" && go.layer != LayerMask.NameToLayer("UI")) 
+           {
+               Destroy(go);
+           }
+       }
+        
+       Application.LoadLevelAdditiveAsync("GabTest");
+        CreateRoundManager();
+    }
+
+    void CreateRoundManager() 
+    {
+        timerText.text = "Timer: 120";
+        RManager.GetComponent<RoundManager>().SetTimerText(timerText);
+      GameObject RM = Instantiate(RManager) as GameObject;   
+    }
 }

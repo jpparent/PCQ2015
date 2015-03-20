@@ -4,8 +4,6 @@ using System.Collections;
 public class HotSpot : MonoBehaviour {
 
     
-    private bool isHatInRange = false;
-
     public bool isActive = false;
     public float scoreIncreaseRate = 1f; // one second delay between score increment
     private float nextScoreIncrease = 0f;
@@ -15,7 +13,7 @@ public class HotSpot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        gameManager = GameObject.FindGameObjectWithTag("GameController");
 	}
 	
 	// Update is called once per frame
@@ -24,15 +22,15 @@ public class HotSpot : MonoBehaviour {
 
 	}
 
-    void OnTriggerStay2D( Collider2D other){
+    void OnTriggerStay( Collider other){
     
         if( isActive && other.tag == "PlayerHat" && Time.time > nextScoreIncrease ){
 
             nextScoreIncrease = Time.time + scoreIncreaseRate;
 
             Debug.Log("score increase!!! YOU RULE!");
-            
-            // gameManager.playerHat ? .score += this.scoreValue
+
+            gameManager.GetComponent<GameManager>().addScoreToPlayer(gameManager.GetComponent<GameManager>().getHat()-1,1);
 
         }
     }

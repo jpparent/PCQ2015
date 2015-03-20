@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Hat : MonoBehaviour
 {
-
     public int currentLives;
 
     // Use this for initialization
@@ -15,6 +14,7 @@ public class Hat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
     }
 
@@ -22,7 +22,12 @@ public class Hat : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            Debug.Log("hit");
+            bool action = col.gameObject.GetComponent<Chase>().IsTackling();
+            if (action)
+            {
+                Hit();
+                Debug.Log("hit");
+            }
         }
     }
 
@@ -38,6 +43,7 @@ public class Hat : MonoBehaviour
     void Dead()
     {
         //Does Dead stuff
+        Destroy(gameObject);
     }
 }
 
