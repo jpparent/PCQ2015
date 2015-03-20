@@ -114,6 +114,7 @@ MonoBehaviour:
   isHat: 0
   nextTackle: 0
   tackleRate: 0
+  deadzone: 0
   vibrationDuration: 0
   leftMotor: 0
   rightMotor: 0
@@ -221,6 +222,7 @@ MonoBehaviour:
   isHat: 0
   nextTackle: 0
   tackleRate: 0
+  deadzone: 0
   vibrationDuration: 0
   leftMotor: 0
   rightMotor: 0
@@ -475,6 +477,7 @@ MonoBehaviour:
   isHat: 0
   nextTackle: 0
   tackleRate: 0
+  deadzone: 0
   vibrationDuration: 0
   leftMotor: 0
   rightMotor: 0
@@ -570,6 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RoundNumber: 0
+  roundList: 01000000020000000300000004000000
 --- !u!4 &1643892322
 Transform:
   m_ObjectHideFlags: 0
@@ -622,6 +626,7 @@ MonoBehaviour:
   isHat: 0
   nextTackle: 0
   tackleRate: 0
+  deadzone: 0
   vibrationDuration: 0
   leftMotor: 0
   rightMotor: 0

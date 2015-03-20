@@ -4,39 +4,57 @@ using System.Collections;
 
 public class CharacterCreator : MonoBehaviour {
 
-    public int RoundNumber = 1 ;
+    public int RoundNumber = 0;
     int before_round;
     public int[] roundList = {1,2,3,4};
     GameObject[] PlayerList;
 
+     
+
     void Awake() 
     {
-        //DontDestroyOnLoad(this);
-        //RoundStart();
-        ShuffleRound();
+        if (RoundNumber == 0)
+        {
+            ShuffleRound();
+            
+        }
+       
+        RoundStart();
+
+        DontDestroyOnLoad(this);
+        GameObject[] ControllerList = GameObject.FindGameObjectsWithTag("GameController");
+
+        if (ControllerList.Length > 0)
+        {
+            foreach (GameObject c in ControllerList)
+            {
+                CharacterCreator cc = c.GetComponent<CharacterCreator>();
+                if (cc.RoundNumber == 0)
+                {
+                    Destroy(c);
+                }
+            }
+        }
     }
 
     void Update() {
     
     if(XCI.GetButtonDown(XboxButton.B)){
-        RoundStart();
-        //RoundEnd();
+        RoundEnd();
     }
 
-    if (RoundNumber > 4) { RoundNumber = 1; }
-   // Debug.Log(RoundNumber);
+   // if (RoundNumber > 4) { RoundNumber = 1; }
     }
 
     void RoundStart() 
     {
-       
-       //ShuffleRound();
+        RoundNumber++;
         PlayerList = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (GameObject p in PlayerList) 
         {
             ControllerManager player_CM = p.GetComponent<ControllerManager>();
-            if (player_CM.controllerNum == roundList[RoundNumber])
+            if (player_CM.controllerNum == RoundNumber)
             {
                 player_CM.isHat = true;
             }
@@ -47,13 +65,11 @@ public class CharacterCreator : MonoBehaviour {
         
         }
 
-        RoundNumber++;
+        
     }
 
     void ShuffleRound() 
     {
-       bool isGood = true;
-
        for (int i = 0; i < roundList.Length;i++)
        {
            int j = Random.Range(0, i);
@@ -73,6 +89,7 @@ public class CharacterCreator : MonoBehaviour {
 
     void RoundEnd() 
     {
+        
         Application.LoadLevel(Application.loadedLevelName);
     
     }
