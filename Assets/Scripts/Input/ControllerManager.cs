@@ -23,6 +23,7 @@ public class ControllerManager : MonoBehaviour
     public float tackleRate;
 
     // Vibration Modifiers
+    public float deadzone;
     public float vibrationDuration;
     public float leftMotor;
     public float rightMotor;
@@ -41,8 +42,9 @@ public class ControllerManager : MonoBehaviour
         nextTackle = 0f;
 
         // Vibration settings
+        deadzone = .95f;
         hotspot = 2;
-        vibrationItensity = .5f;
+        vibrationItensity = .65f;
         vibrationDuration = 3;
         leftMotor = 0f;
         rightMotor = 0f;
@@ -110,7 +112,7 @@ public class ControllerManager : MonoBehaviour
             rightMotor = vibrationItensity;
             canVibrate = false;
         }
-
+        
         leftMotor = Mathf.Lerp(leftMotor, 0f, Time.deltaTime * vibrationDuration);
         rightMotor = Mathf.Lerp(rightMotor, 0f, Time.deltaTime * vibrationDuration);
 
@@ -127,32 +129,28 @@ public class ControllerManager : MonoBehaviour
         switch (hotspot)
         {
             case 1:
-                if (axisY > .2f)
-                    VibrationManager();
+                if (axisY > deadzone)
+                    canVibrate = true;
                 break;
             case 2:
-                if (axisY < -.2f)
-                    VibrationManager();
+                if (axisY < -deadzone)
+                    canVibrate = true;
                 break;
             case 3:
-                if (axisX > .2f)
-                    VibrationManager();
+                if (axisX > deadzone)
+                    canVibrate = true;
                 break;
             case 4:
-                if (axisX < -.2f)
-                    VibrationManager();
+                if (axisX < -deadzone)
+                    canVibrate = true;
                 break;
         }
-
-
-
-
-
 
         if (axisX > .2f || axisX < -.2f || axisY > .2f || axisY < -.2f)
         {
 #if DEBUG
             Debug.Log("I am hat");
+            Debug.Log("Axis X: " + axisX + " Axis Y: " + axisY);
 #endif
         }
     }
