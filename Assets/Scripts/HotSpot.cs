@@ -8,7 +8,7 @@ public class HotSpot : MonoBehaviour {
 
     public bool isActive = false;
     public float scoreIncreaseRate = 1f; // one second delay between score increment
-    public float nextScoreIncrease;
+    private float nextScoreIncrease = 0f;
     public int scoreValue = 100;    // staying inside the hotspot for [delayBetweenScoreIncrement] seconds increment the hat's score by this amount
 
     public GameObject gameManager;
@@ -25,11 +25,13 @@ public class HotSpot : MonoBehaviour {
 	}
 
     void OnTriggerStay2D( Collider2D other){
+    
+        if( isActive && other.tag == "PlayerHat" && Time.time > nextScoreIncrease ){
 
-        if( other.tag == "playerHat" && Time.time > nextScoreIncrease ){
+            nextScoreIncrease = Time.time + scoreIncreaseRate;
 
-            nextScoreIncrease = Time.time + scoreIncreaseRate; 
-
+            Debug.Log("score increase!!! YOU RULE!");
+            
             // gameManager.playerHat ? .score += this.scoreValue
 
         }
