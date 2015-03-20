@@ -3877,7 +3877,7 @@ MonoBehaviour:
   playerNum: 0
   controllerNum: 0
   hotspot: 0
-  isHat: 1
+  isHat: 0
   nextTackle: 0
   tackleRate: 0
   deadzone: 0
@@ -7507,6 +7507,10 @@ Prefab:
       propertyPath: m_UseGravity
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11451474, guid: a4191aa8b0930374387b00a4c216b038, type: 2}
+      propertyPath: isHat
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4191aa8b0930374387b00a4c216b038, type: 2}
   m_RootGameObject: {fileID: 588392585}
@@ -9501,7 +9505,7 @@ MonoBehaviour:
   scoreText4: {fileID: 1410493459}
   timerText: {fileID: 1642832020}
   scoreTrack: 
-  RManager: {fileID: 0}
+  RManager: {fileID: 174166, guid: 546e2e45093a7c547a103fb0aaceffbd, type: 2}
   round: 0
   hatRound: 01000000020000000300000004000000
 --- !u!4 &1774699311

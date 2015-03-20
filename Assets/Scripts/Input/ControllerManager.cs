@@ -8,7 +8,9 @@ public class ControllerManager : MonoBehaviour
 {
     public enum PlayerNumber { player_1, player_2, player_3, player_4 };
 
-    public float moveSpeed = 20f;
+    private Animator animator;
+
+    public float moveSpeed = 5f;
     public PlayerNumber playerNum;
     public int controllerNum;
     public int hotspot;
@@ -30,6 +32,11 @@ public class ControllerManager : MonoBehaviour
     public float vibrationItensity;
     private bool canVibrate;
 
+
+    void Start() {
+        animator = GetComponent<Animator>();
+    }
+
     // Use this for initialization
     void Awake()
     {
@@ -39,11 +46,12 @@ public class ControllerManager : MonoBehaviour
 
         // Vibration settings
         deadzone = .95f;
-        hotspot = 2;
+        hotspot = GameObject.FindGameObjectWithTag("RoundManager").GetComponent<RoundManager>().hotspotIndex[0];
         vibrationItensity = .65f;
         vibrationDuration = 3;
         leftMotor = 0f;
         rightMotor = 0f;
+
 
         if (isHat)
         {
@@ -104,11 +112,15 @@ public class ControllerManager : MonoBehaviour
         // Variable afin de verifier si le stick est activer, peu importe la direction de l'axe
         // A utiliser avec le mecanim
         float axis = Mathf.Abs(axisX) > Mathf.Abs(axisY) ? axisX : axisY;
+
+        animator.SetFloat("PlayerMovementSpeed", Mathf.Abs(axis));
+
                 
         float newPosX = newPos.x + (axisX * moveSpeed * Time.deltaTime);
         float newPosZ = newPos.z + (axisY * moveSpeed * Time.deltaTime);
 
         newPos = new Vector3(newPosX, newPos.y, newPosZ);
+        transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
         if (Mathf.Abs(axis) > 0.2f)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
@@ -116,6 +128,8 @@ public class ControllerManager : MonoBehaviour
         
         Debug.Log(Mathf.Atan2(axisX, axisY));
         transform.position = newPos;
+
+
     }
 
     void VibrationManager()
@@ -148,11 +162,11 @@ public class ControllerManager : MonoBehaviour
                     canVibrate = true;
                 break;
             case 2:
-                if (axisY < -deadzone)
+                if (axisX > deadzone)
                     canVibrate = true;
                 break;
             case 3:
-                if (axisX > deadzone)
+                if (axisY < -deadzone)
                     canVibrate = true;
                 break;
             case 4:
@@ -175,6 +189,7 @@ public class ControllerManager : MonoBehaviour
         // Assigner a A ou X... A verifier.
         if ((XCI.GetButton(XboxButton.X, controllerNum) || XCI.GetButton(XboxButton.A, controllerNum)) && !isHat && Time.time > nextTackle)
         {
+            animator.SetTrigger("PlayerIsTackling");
 
             gameObject.GetComponent<Chase>().Tackling();
             nextTackle = Time.time + tackleRate;

@@ -11,61 +11,22 @@ public class RoundManager : MonoBehaviour {
     public const int MAX_TIMER = 120;
 
     //Hotspot
-    public GameObject[] hotspots;
-    public int activeHotspotIndex = 1;
+    public HotSpot[] hotspots;
+    public int[] hotspotIndex = {0,1,2,3};
+    public int activeHotspotIndex = 0;
 
-    public float hotspotActiveTime = 5f; // time that hotspots stay active
-    public float hotspotActiveUntil;
-
-    public float hotspotCycleDelay = 5f; // delay between to hotspot's activation
-    private float nextHotspotCycle;
+    GameManager GManager;
 
 	// Use this for initialization
 	void Awake () {
-
-        hotspots = GameObject.FindGameObjectsWithTag("Hotspot");
+        ShuffleHotspots();
         timerCount = MAX_TIMER;
         StartCoroutine(Timer());
-        StartRound();
-    
+        ChangeHotspot();
+        GManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     
     }
 	
-	// Update is called once per frame
-	void Update () {
-
-
-        // check if it's time to turn off a hotspot
-        if (activeHotspotIndex >= 0 && Time.time > hotspotActiveUntil)
-        {
-
-            hotspots[activeHotspotIndex].GetComponent<HotSpot>().isActive = false;
-            activeHotspotIndex = -1; // hack to know that no hotspots are active
-
-            nextHotspotCycle = Time.time + hotspotCycleDelay; // set time for the next cycle
-        }
-
-        // check if it's time to choose another hotspot
-        else if (activeHotspotIndex < 0 && Time.time > nextHotspotCycle)
-        {
-
-            activeHotspotIndex = Random.Range(0, hotspots.Length); // FIXME make it impossible to choose the same twice in a 
-            hotspots[activeHotspotIndex].GetComponent<HotSpot>().isActive = true;
-
-            hotspotActiveUntil = Time.time + hotspotActiveTime;
-
-        }
-
-	}
-
-    void StartRound(){
-
-        // activate a hotspot randomly
-        activeHotspotIndex = Random.Range(0, hotspots.Length);
-        hotspots[activeHotspotIndex].GetComponent<HotSpot>().isActive = true;
-      
-    }
-
     IEnumerator Timer()
     {  //triggers end of turn for hat
         while (timerCount > 0)
@@ -75,13 +36,48 @@ public class RoundManager : MonoBehaviour {
             //timerString = timerString.Format("{0:0}:{1:00}", Mathf.Floor(timerCount/60), timerCount % 60);
             timerText.text = "Timer: " + timerCount;
         } //timer==0 -> end of turn
+        StopRound();
         
     }
 
     public void SetTimerText(Text timerT) 
     {
         this.timerText = timerT;
+    }
+
+    public void ChangeHotspot() {
+        if (activeHotspotIndex < hotspots.Length) {
+            activeHotspotIndex++;
+        }
+        else if (activeHotspotIndex >= hotspots.Length)
+        {
+            activeHotspotIndex =0;
+            ShuffleHotspots();
+        }
+        foreach (HotSpot htspt in hotspots) {
+            htspt.isActive = false;
+        }
+        hotspots[hotspotIndex[activeHotspotIndex]].isActive = true;
+        GameObject.FindGameObjectWithTag("PlayerHat").GetComponent<ControllerManager>().hotspot = hotspotIndex[activeHotspotIndex]+1;
+    }
+
+    void ShuffleHotspots() {
+        for (int i = 0; i < hotspots.Length; i++)
+        {
+            int j = Random.Range(0, i);
+            int source = hotspotIndex[i];
+            if (j != i)
+            {
+                hotspotIndex[i] = hotspotIndex[j];
+            }
+            hotspotIndex[j] = source;
+        }
     
     }
-    
+
+    void StopRound() {
+
+        GManager.NextRound();
+    }
+
 }
