@@ -47,7 +47,15 @@ public class ControllerManager : MonoBehaviour
         leftMotor = 0f;
         rightMotor = 0f;
 
-        gameObject.tag = "Player";
+        if (isHat)
+        {
+         gameObject.tag = "PlayerHat";
+        }
+        else
+        {
+            gameObject.tag = "Player";
+        }
+
         moveDir = Vector3.zero;
 
         // Set Player controllers
@@ -120,6 +128,7 @@ public class ControllerManager : MonoBehaviour
     // Methode pour verifier le spot a aller.
     void HatPlayer()
     {
+
         float axisX = XCI.GetAxis(XboxAxis.RightStickX);
         float axisY = XCI.GetAxis(XboxAxis.RightStickY);
 
