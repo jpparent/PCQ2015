@@ -27,7 +27,7 @@ GameObject:
   - 4: {fileID: 406736}
   - 114: {fileID: 11406724}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,6 +182,12 @@ MonoBehaviour:
   timerText: {fileID: 11406736}
   timerCount: 0
   timerString: 
+  hotspots: []
+  activeHotspotIndex: 1
+  hotspotActiveTime: 5
+  hotspotActiveUntil: 0
+  hotspotCycleDelay: 5
+  round: 0
 --- !u!114 &11406726
 MonoBehaviour:
   m_ObjectHideFlags: 1
