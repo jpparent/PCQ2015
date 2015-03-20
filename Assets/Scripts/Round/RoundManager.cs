@@ -60,15 +60,10 @@ public class RoundManager : MonoBehaviour {
 
     void StartRound(){
 
-       
-
-
         // activate a hotspot randomly
         activeHotspotIndex = Random.Range(0, hotspots.Length);
         hotspots[activeHotspotIndex].GetComponent<HotSpot>().isActive = true;
-        
-        
-
+      
     }
 
     IEnumerator Timer()
@@ -80,6 +75,7 @@ public class RoundManager : MonoBehaviour {
             //timerString = timerString.Format("{0:0}:{1:00}", Mathf.Floor(timerCount/60), timerCount % 60);
             timerText.text = "Timer: " + timerCount;
         } //timer==0 -> end of turn
+        
     }
 
     public void SetTimerText(Text timerT) 

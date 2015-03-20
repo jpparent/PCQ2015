@@ -96,13 +96,14 @@ public class GameManager : MonoBehaviour {
        GameObject[] AllSceneObjects = GameObject.FindObjectsOfType<GameObject>();
 
        foreach (GameObject go in AllSceneObjects) {
-           if (go.activeInHierarchy && go.gameObject.tag != "GameController" && go.layer != LayerMask.NameToLayer("UI") && go.gameObject.tag != "MainCamera") 
+           if (go.activeInHierarchy && go.gameObject.tag != "GameController" && go.layer != LayerMask.NameToLayer("UI")) 
            {
                Destroy(go);
            }
        }
+        
+       Application.LoadLevelAdditiveAsync("GabTest");
         CreateRoundManager();
-       Application.LoadLevelAdditiveAsync("JP_tests");
     }
 
     void CreateRoundManager() 
