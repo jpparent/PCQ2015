@@ -30,7 +30,7 @@ public class HotSpot : MonoBehaviour {
 
             Debug.Log("score increase!!! YOU RULE!");
 
-            gameManager.GetComponent<GameManager>().addScoreToPlayer(gameManager.GetComponent<GameManager>().getHat(),1);
+            gameManager.GetComponent<GameManager>().addScoreToPlayer(gameManager.GetComponent<GameManager>().getHat()-1,1);
 
         }
     }

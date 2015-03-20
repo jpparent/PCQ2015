@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Hat : MonoBehaviour
 {
-
     public int currentLives;
 
     // Use this for initialization
@@ -15,6 +14,7 @@ public class Hat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
     }
 

@@ -16,6 +16,8 @@ public class ControllerManager : MonoBehaviour
     public int hotspot;
 
     // set controller number pour le hat
+    public Chase chase;
+    public Hat hat;
     public bool isHat;
 
     // cooldown de tackle
@@ -53,10 +55,12 @@ public class ControllerManager : MonoBehaviour
         if (isHat)
         {
             gameObject.tag = "PlayerHat";
+            hat = gameObject.AddComponent<Hat>() as Hat;
         }
         else
         {
             gameObject.tag = "Player";
+            chase = gameObject.AddComponent<Chase>() as Chase;
         }
 
         // Set Player controllers
@@ -103,15 +107,25 @@ public class ControllerManager : MonoBehaviour
         Vector3 newPos = transform.position;
         float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controllerNum);
         float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controllerNum);
+        
+        // Variable afin de verifier si le stick est activer, peu importe la direction de l'axe
+        // A utiliser avec le mecanim
         float axis = Mathf.Abs(axisX) > Mathf.Abs(axisY) ? axisX : axisY;
 
         animator.SetFloat("PlayerMovementSpeed", Mathf.Abs(axis));
 
+                
         float newPosX = newPos.x + (axisX * moveSpeed * Time.deltaTime);
         float newPosZ = newPos.z + (axisY * moveSpeed * Time.deltaTime);
 
         newPos = new Vector3(newPosX, newPos.y, newPosZ);
         transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
+        if (Mathf.Abs(axis) > 0.2f)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
+        }
+        
+        Debug.Log(Mathf.Atan2(axisX, axisY));
         transform.position = newPos;
 
 
