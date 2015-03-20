@@ -24,7 +24,7 @@ public class HotSpot : MonoBehaviour {
 
 	}
 
-    void OnTriggerStay2D( Collider2D other){
+    void OnTriggerStay( Collider other){
     
         if( isActive && other.tag == "PlayerHat" && Time.time > nextScoreIncrease ){
 
