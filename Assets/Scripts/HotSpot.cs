@@ -26,14 +26,7 @@ public class HotSpot : MonoBehaviour {
             ChangeHotspot();
         }
 
-        if (isActive)
-        {
-            GetComponent<ParticleSystem>().enableEmission = true;
-        }
-        else {
-            GetComponent<ParticleSystem>().enableEmission = false;
-        
-        }
+       
 
 	}
 
