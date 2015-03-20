@@ -89,9 +89,13 @@ public class ControllerManager : MonoBehaviour
     void Update()
     {
         if (isHat)
+        {
             HatPlayer();
-
-        ChaseTeam();
+        }
+        else
+        {
+            ChaseTeam();
+        }
     }
 
     void LeftAxisManager()
@@ -109,7 +113,6 @@ public class ControllerManager : MonoBehaviour
         //transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
         transform.position = newPos;
     }
-
 
     void VibrationManager()
     {
@@ -166,17 +169,17 @@ public class ControllerManager : MonoBehaviour
     void ChaseTeam()
     {
         // Assigner a A ou X... A verifier.
-        bool tackle = false;
-        if (!isHat)
-            tackle = XCI.GetButton(XboxButton.X) || XCI.GetButton(XboxButton.A);
-
-        if (tackle && Time.time > nextTackle)
+        if ((XCI.GetButton(XboxButton.X, controllerNum) || XCI.GetButton(XboxButton.A, controllerNum)) && !isHat && Time.time > nextTackle)
         {
+         
+                gameObject.GetComponent<Chase>().Tackling();
+                nextTackle = Time.time + tackleRate;
+       
+
 #if DEBUG
 
             Debug.Log("I haz tackled");
 #endif
-            nextTackle = Time.time + tackleRate;
         }
     }
 
