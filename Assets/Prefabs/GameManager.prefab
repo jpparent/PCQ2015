@@ -317,7 +317,7 @@ MonoBehaviour:
   scoreText4: {fileID: 11406734}
   timerText: {fileID: 11406736}
   scoreTrack: 
-  RoundManager: {fileID: 174166, guid: 546e2e45093a7c547a103fb0aaceffbd, type: 2}
+  RManager: {fileID: 174166, guid: 546e2e45093a7c547a103fb0aaceffbd, type: 2}
   round: 0
   hatRound: 01000000020000000300000004000000
 --- !u!222 &22206728
