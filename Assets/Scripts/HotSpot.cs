@@ -15,7 +15,7 @@ public class HotSpot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        gameManager = GameObject.FindGameObjectWithTag("GameController");
 	}
 	
 	// Update is called once per frame
@@ -23,7 +23,7 @@ public class HotSpot : MonoBehaviour {
 
 
 	}
-
+    
     void OnTriggerStay2D( Collider2D other){
     
         if( isActive && other.tag == "PlayerHat" && Time.time > nextScoreIncrease ){

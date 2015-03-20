@@ -25,7 +25,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 406736}
-  - 114: {fileID: 11406724}
+  - 114: {fileID: 11431542}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -158,36 +158,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: ScoreText1
---- !u!114 &11406724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 106726}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c474f79d6a0aa914c958c0741156f1a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreArr:
-  - {fileID: 11406722}
-  - {fileID: 11406730}
-  - {fileID: 11406732}
-  - {fileID: 11406734}
-  scoreText1: {fileID: 11406722}
-  scoreText2: {fileID: 11406730}
-  scoreText3: {fileID: 11406732}
-  scoreText4: {fileID: 11406734}
-  scoreTrack: 00000000000000000000000000000000
-  timerText: {fileID: 11406736}
-  timerCount: 0
-  timerString: 
-  hotspots: []
-  activeHotspotIndex: 1
-  hotspotActiveTime: 5
-  hotspotActiveUntil: 0
-  hotspotCycleDelay: 5
-  round: 0
 --- !u!114 &11406726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -329,6 +299,27 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Timer: 0:00'
+--- !u!114 &11431542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c474f79d6a0aa914c958c0741156f1a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreArr: []
+  scoreText1: {fileID: 11406722}
+  scoreText2: {fileID: 11406730}
+  scoreText3: {fileID: 11406732}
+  scoreText4: {fileID: 11406734}
+  timerText: {fileID: 11406736}
+  scoreTrack: 
+  RoundManager: {fileID: 174166, guid: 546e2e45093a7c547a103fb0aaceffbd, type: 2}
+  round: 0
+  hatRound: 01000000020000000300000004000000
 --- !u!222 &22206728
 CanvasRenderer:
   m_ObjectHideFlags: 1

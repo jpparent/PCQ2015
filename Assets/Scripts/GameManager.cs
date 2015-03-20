@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour {
        GameObject[] AllSceneObjects = GameObject.FindObjectsOfType<GameObject>();
 
        foreach (GameObject go in AllSceneObjects) {
-           if (go.activeInHierarchy && go.gameObject.tag != "GameController") 
+           if (go.activeInHierarchy && go.gameObject.tag != "GameController" && go.layer != LayerMask.NameToLayer("UI") && go.gameObject.tag != "MainCamera") 
            {
                Destroy(go);
            }

@@ -11,7 +11,7 @@ public class RoundManager : MonoBehaviour {
     public const int MAX_TIMER = 120;
 
     //Hotspot
-    public HotSpot[] hotspots;
+    public GameObject[] hotspots;
     public int activeHotspotIndex = 1;
 
     public float hotspotActiveTime = 5f; // time that hotspots stay active
@@ -23,6 +23,7 @@ public class RoundManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+        hotspots = GameObject.FindGameObjectsWithTag("Hotspot");
         StartRound();
     
     
@@ -36,7 +37,7 @@ public class RoundManager : MonoBehaviour {
         if (activeHotspotIndex >= 0 && Time.time > hotspotActiveUntil)
         {
 
-            hotspots[activeHotspotIndex].isActive = false;
+            hotspots[activeHotspotIndex].GetComponent<HotSpot>().isActive = false;
             activeHotspotIndex = -1; // hack to know that no hotspots are active
 
             nextHotspotCycle = Time.time + hotspotCycleDelay; // set time for the next cycle
@@ -47,7 +48,7 @@ public class RoundManager : MonoBehaviour {
         {
 
             activeHotspotIndex = Random.Range(0, hotspots.Length); // FIXME make it impossible to choose the same twice in a 
-            hotspots[activeHotspotIndex].isActive = true;
+            hotspots[activeHotspotIndex].GetComponent<HotSpot>().isActive = true;
 
             hotspotActiveUntil = Time.time + hotspotActiveTime;
 
@@ -63,7 +64,7 @@ public class RoundManager : MonoBehaviour {
 
         // activate a hotspot randomly
         activeHotspotIndex = Random.Range(0, hotspots.Length);
-        hotspots[activeHotspotIndex].isActive = true;
+        hotspots[activeHotspotIndex].GetComponent<HotSpot>().isActive = true;
         
         
 
@@ -79,4 +80,11 @@ public class RoundManager : MonoBehaviour {
             timerText.text = "Timer: " + timerCount;
         } //timer==0 -> end of turn
     }
+
+    public void SetTimerText(Text timerT) 
+    {
+        this.timerText = timerT;
+    
+    }
+    
 }
