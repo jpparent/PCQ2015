@@ -1,4 +1,6 @@
-﻿using XboxCtrlrInput;
+﻿#define DEBUG
+
+using XboxCtrlrInput;
 using UnityEngine;
 using System.Collections;
 
@@ -11,33 +13,44 @@ public class ControllerManager : MonoBehaviour
     public float moveSpeedModifierDuration;
     public PlayerNumber playerNum;
     public int controllerNum;
+    public int hotspot;
 
-    // set controller number pour la 
-    public int hatController;
+    // set controller number pour le hat
+    public bool isHat;
+
+    // cooldown de tackle
+    public float nextTackle;
+    public float tackleRate;
 
     // Vibration Modifiers
     public float vibrationDuration;
     public float leftMotor;
     public float rightMotor;
     public float vibrationItensity;
-
-    public bool canEat;
     private bool canVibrate;
 
     public Animator anim;
     private Vector3 moveDir;
-    float eating;
 
     // Use this for initialization
     void Awake()
     {
+        // Player Controlls
+        isHat = false;
+        tackleRate = 5f;
+        nextTackle = 0f;
+
+        // Vibration settings
+        hotspot = 2;
         vibrationItensity = .5f;
         vibrationDuration = 3;
         leftMotor = 0f;
         rightMotor = 0f;
+
         gameObject.tag = "Player";
         moveDir = Vector3.zero;
 
+        // Set Player controllers
         switch (playerNum)
         {
             case PlayerNumber.player_1:
@@ -55,7 +68,6 @@ public class ControllerManager : MonoBehaviour
         }
 
         XCI.DEBUG_LogControllerNames();
-
     }
 
     // Update is called once per frame
@@ -63,6 +75,14 @@ public class ControllerManager : MonoBehaviour
     {
         LeftAxisManager();
         VibrationManager();
+    }
+
+    void Update()
+    {
+        if (isHat)
+            HatPlayer();
+
+        ChaseTeam();
     }
 
     void LeftAxisManager()
@@ -75,12 +95,12 @@ public class ControllerManager : MonoBehaviour
 
         float newPosX = newPos.x + (axisX * moveSpeed * Time.deltaTime);
         float newPosZ = newPos.y + (axisY * moveSpeed * Time.deltaTime);
-        
+
         newPos = new Vector2(newPosX, newPosZ);
         //transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
         transform.position = newPos;
     }
-    
+
 
     void VibrationManager()
     {
@@ -100,13 +120,67 @@ public class ControllerManager : MonoBehaviour
     // Methode pour verifier le spot a aller.
     void HatPlayer()
     {
-        float axisX = XCI.GetAxis(XboxAxis.RightStickX, hatController);
-        float axisY = XCI.GetAxis(XboxAxis.RightStickY, hatController);
+        float axisX = XCI.GetAxis(XboxAxis.RightStickX);
+        float axisY = XCI.GetAxis(XboxAxis.RightStickY);
+
+
+        switch (hotspot)
+        {
+            case 1:
+                if (axisY > .2f)
+                    VibrationManager();
+                break;
+            case 2:
+                if (axisY < -.2f)
+                    VibrationManager();
+                break;
+            case 3:
+                if (axisX > .2f)
+                    VibrationManager();
+                break;
+            case 4:
+                if (axisX < -.2f)
+                    VibrationManager();
+                break;
+        }
+
+
+
+
+
+
+        if (axisX > .2f || axisX < -.2f || axisY > .2f || axisY < -.2f)
+        {
+#if DEBUG
+            Debug.Log("I am hat");
+#endif
+        }
     }
 
     void ChaseTeam()
     {
         // Assigner a A ou X... A verifier.
-        bool tackle = !XCI.GetButtonDown(XboxButton.X, hatController) || !XCI.GetButtonDown(XboxButton.A, hatController);
+        bool tackle = false;
+        if (!isHat)
+            tackle = XCI.GetButton(XboxButton.X) || XCI.GetButton(XboxButton.A);
+
+        if (tackle && Time.time > nextTackle) {
+#if DEBUG
+        
+            Debug.Log("I haz tackled");
+#endif
+            nextTackle = Time.time + tackleRate;    
+        }
+    }
+
+    void SetHat()
+    {
+        isHat = true;
+    }
+
+    // Reinitialize all
+    void Reset()
+    {
+        isHat = false;
     }
 }
