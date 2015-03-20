@@ -2,7 +2,12 @@ fileFormatVersion: 2
 guid: c474f79d6a0aa914c958c0741156f1a7
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - scoreText1: {instanceID: 0}
+  - scoreText2: {instanceID: 0}
+  - scoreText3: {instanceID: 0}
+  - scoreText4: {instanceID: 0}
+  - RoundManager: {fileID: 174166, guid: 546e2e45093a7c547a103fb0aaceffbd, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

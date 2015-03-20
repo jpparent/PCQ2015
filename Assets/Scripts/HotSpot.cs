@@ -15,7 +15,7 @@ public class HotSpot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	
+        gameManager = GameObject.FindGameObjectWithTag("GameController");
 	}
 	
 	// Update is called once per frame
