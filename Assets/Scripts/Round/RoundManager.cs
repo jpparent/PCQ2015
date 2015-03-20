@@ -21,7 +21,7 @@ public class RoundManager : MonoBehaviour {
     private float nextHotspotCycle;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
         hotspots = GameObject.FindGameObjectsWithTag("Hotspot");
         timerCount = MAX_TIMER;

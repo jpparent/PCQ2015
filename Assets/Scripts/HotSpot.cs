@@ -29,8 +29,8 @@ public class HotSpot : MonoBehaviour {
             nextScoreIncrease = Time.time + scoreIncreaseRate;
 
             Debug.Log("score increase!!! YOU RULE!");
-            
-            // gameManager.playerHat ? .score += this.scoreValue
+
+            gameManager.GetComponent<GameManager>().addScoreToPlayer(gameManager.GetComponent<GameManager>().getHat(),1);
 
         }
     }

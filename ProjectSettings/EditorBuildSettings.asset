@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/GabGManager.unity
   - enabled: 1
     path: Assets/Scenes/GabTest.unity
+  - enabled: 1
+    path: Assets/Scenes/JP_tests.unity

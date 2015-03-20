@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
+
+        
+
         if (XCI.GetButtonDown(XboxButton.B)) {
 
             NextRound();
@@ -42,6 +45,12 @@ public class GameManager : MonoBehaviour {
         {
             round = 1;
         }
+        if (round <= 4 && round >= 1)
+        {
+            setScore(getHat()-1);
+            Debug.Log(getHat());
+        }
+
 	}
 	
 	
@@ -93,11 +102,12 @@ public class GameManager : MonoBehaviour {
            }
        }
         CreateRoundManager();
-       Application.LoadLevelAdditiveAsync("GabTest");
+       Application.LoadLevelAdditiveAsync("JP_tests");
     }
 
     void CreateRoundManager() 
     {
+        timerText.text = "Timer: 120";
         RManager.GetComponent<RoundManager>().SetTimerText(timerText);
       GameObject RM = Instantiate(RManager) as GameObject;   
     }
