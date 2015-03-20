@@ -36,7 +36,6 @@ public class ControllerManager : MonoBehaviour
     void Awake()
     {
         // Player Controlls
-        isHat = false;
         tackleRate = 5f;
         nextTackle = 0f;
 
