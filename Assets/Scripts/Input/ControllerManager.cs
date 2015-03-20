@@ -45,6 +45,7 @@ public class ControllerManager : MonoBehaviour
         leftMotor = 0f;
         rightMotor = 0f;
 
+
         if (isHat)
         {
             gameObject.tag = "PlayerHat";
