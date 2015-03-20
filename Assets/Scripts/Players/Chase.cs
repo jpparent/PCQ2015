@@ -11,7 +11,7 @@ public class Chase : MonoBehaviour
     // isTackling -> l'evenement
     bool tackling;
     bool isTackling;
-
+    
     // Use this for initialization
     void Awake()
     {
@@ -34,11 +34,12 @@ public class Chase : MonoBehaviour
         newPos = Vector2.right + oldPos;
 
         Debug.Log("start tackle");
-
+        Animator anim = gameObject.GetComponent<Animator>();
+        anim.SetBool("isKicking", true);
         transform.position = newPos;
 
         yield return new WaitForSeconds(0.5f);
-
+        anim.SetBool("isKicking", false);
         Debug.Log("done tackle");
 
         transform.position = oldPos;
