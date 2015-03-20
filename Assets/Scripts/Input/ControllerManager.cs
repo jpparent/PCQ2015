@@ -29,8 +29,7 @@ public class ControllerManager : MonoBehaviour
     public float rightMotor;
     public float vibrationItensity;
     private bool canVibrate;
-
-
+    
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -125,10 +124,7 @@ public class ControllerManager : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
         }
 
-        Debug.Log(Mathf.Atan2(axisX, axisY));
         transform.position = newPos;
-
-
     }
 
     void VibrationManager()
