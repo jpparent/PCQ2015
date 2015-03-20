@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using XboxCtrlrInput;
 
 
 public class GameManager : MonoBehaviour {
@@ -10,10 +11,10 @@ public class GameManager : MonoBehaviour {
 	public Text   scoreText2;
 	public Text   scoreText3;
 	public Text   scoreText4;
+    public Text timerText;
 	public int[]  scoreTrack;
 
-
-   
+    public GameObject RoundManager;
 
     //Round Data
     public int round;
@@ -27,12 +28,20 @@ public class GameManager : MonoBehaviour {
 
         ShuffleHat();
 
+
 	}
 	
 	// Update is called once per frame
 	void Update() {
+        if (XCI.GetButtonDown(XboxButton.B)) {
 
+            NextRound();
+        }
 
+        if (round > 4) 
+        {
+            round = 1;
+        }
 	}
 	
 	
@@ -68,11 +77,28 @@ public class GameManager : MonoBehaviour {
 
     public int getHat()
     {
-        return hatRound[round];
+        return hatRound[round-1];
     }
 
     public void NextRound()
     {
         round++;
+        
+       GameObject[] AllSceneObjects = GameObject.FindObjectsOfType<GameObject>();
+
+       foreach (GameObject go in AllSceneObjects) {
+           if (go.activeInHierarchy && go.gameObject.tag != "GameController") 
+           {
+               Destroy(go);
+           }
+       }
+
+       Application.LoadLevelAdditiveAsync("GabTest");
+    }
+
+    void CreateRoundManager() 
+    {
+        RoundManager.GetComponent<RoundManager>().SetTimerText(timerText);
+        Instantiate(RoundManager);   
     }
 }
