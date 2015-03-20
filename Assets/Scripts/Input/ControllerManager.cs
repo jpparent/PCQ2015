@@ -1,6 +1,4 @@
-﻿#define DEBUG
-
-using XboxCtrlrInput;
+﻿using XboxCtrlrInput;
 using UnityEngine;
 using System.Collections;
 
@@ -33,7 +31,8 @@ public class ControllerManager : MonoBehaviour
     private bool canVibrate;
 
 
-    void Start() {
+    void Start()
+    {
         animator = GetComponent<Animator>();
     }
 
@@ -108,14 +107,14 @@ public class ControllerManager : MonoBehaviour
         Vector3 newPos = transform.position;
         float axisX = XCI.GetAxis(XboxAxis.LeftStickX, controllerNum);
         float axisY = XCI.GetAxis(XboxAxis.LeftStickY, controllerNum);
-        
+
         // Variable afin de verifier si le stick est activer, peu importe la direction de l'axe
         // A utiliser avec le mecanim
         float axis = Mathf.Abs(axisX) > Mathf.Abs(axisY) ? axisX : axisY;
 
         animator.SetFloat("PlayerMovementSpeed", Mathf.Abs(axis));
 
-                
+
         float newPosX = newPos.x + (axisX * moveSpeed * Time.deltaTime);
         float newPosZ = newPos.z + (axisY * moveSpeed * Time.deltaTime);
 
@@ -125,7 +124,7 @@ public class ControllerManager : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
         }
-        
+
         Debug.Log(Mathf.Atan2(axisX, axisY));
         transform.position = newPos;
 
@@ -150,37 +149,32 @@ public class ControllerManager : MonoBehaviour
     // Methode pour verifier le spot a aller.
     void HatPlayer()
     {
+        float axisX = XCI.GetAxis(XboxAxis.RightStickX, controllerNum);
+        float axisY = XCI.GetAxis(XboxAxis.RightStickY, controllerNum);
 
-        float axisX = XCI.GetAxis(XboxAxis.RightStickX);
-        float axisY = XCI.GetAxis(XboxAxis.RightStickY);
-
+        bool down = XCI.GetDPad(XboxDPad.Down, controllerNum);
+        bool up = XCI.GetDPad(XboxDPad.Up, controllerNum);
+        bool left = XCI.GetDPad(XboxDPad.Left, controllerNum);
+        bool right = XCI.GetDPad(XboxDPad.Right, controllerNum);
 
         switch (hotspot)
         {
             case 1:
-                if (axisY > deadzone)
+                if (axisY > deadzone || up)
                     canVibrate = true;
                 break;
             case 2:
-                if (axisX > deadzone)
+                if (axisX > deadzone || down)
                     canVibrate = true;
                 break;
             case 3:
-                if (axisY < -deadzone)
+                if (axisY < -deadzone || left)
                     canVibrate = true;
                 break;
             case 4:
-                if (axisX < -deadzone)
+                if (axisX < -deadzone || right)
                     canVibrate = true;
                 break;
-        }
-
-        if (axisX > .2f || axisX < -.2f || axisY > .2f || axisY < -.2f)
-        {
-#if DEBUG
-            Debug.Log("I am hat");
-            Debug.Log("Axis X: " + axisX + " Axis Y: " + axisY);
-#endif
         }
     }
 
@@ -193,12 +187,6 @@ public class ControllerManager : MonoBehaviour
 
             gameObject.GetComponent<Chase>().Tackling();
             nextTackle = Time.time + tackleRate;
-
-
-#if DEBUG
-
-            Debug.Log("I haz tackled");
-#endif
         }
     }
 
