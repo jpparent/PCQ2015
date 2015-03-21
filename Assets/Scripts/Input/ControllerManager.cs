@@ -6,7 +6,7 @@ public enum PlayerNumber { player_1, player_2, player_3, player_4 };
 
 public class ControllerManager : MonoBehaviour
 {
-    
+
 
     private Animator animator;
 
@@ -186,7 +186,7 @@ public class ControllerManager : MonoBehaviour
     void ChaseTeam()
     {
         // Assigner a A ou X... A verifier.
-        if ((XCI.GetButton(XboxButton.X, controllerNum) || XCI.GetButton(XboxButton.A, controllerNum)) && !isHat && Time.time > nextTackle)
+        if ((XCI.GetButton(XboxButton.X, controllerNum) || XCI.GetButton(XboxButton.A, controllerNum) || XCI.GetButton(XboxButton.Y, controllerNum) || XCI.GetButton(XboxButton.B, controllerNum)) && !isHat && Time.time > nextTackle)
         {
             animator.SetTrigger("PlayerIsTackling");
 
