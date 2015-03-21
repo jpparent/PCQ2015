@@ -89,16 +89,7 @@ public class GameManager : MonoBehaviour {
     {
        round++;
        
-      
-       StartCoroutine(LoadNextLevel);
-    }
-
-    IEnumerator LoadNextLevel {
-        
-        get
-        {
-            yield return new WaitForSeconds(1);
-            GameObject[] AllSceneObjects = GameObject.FindObjectsOfType<GameObject>();
+      GameObject[] AllSceneObjects = GameObject.FindObjectsOfType<GameObject>();
 
             foreach (GameObject go in AllSceneObjects)
             {
@@ -112,6 +103,15 @@ public class GameManager : MonoBehaviour {
 
                 }
             }
+       StartCoroutine(LoadNextLevel);
+    }
+
+    IEnumerator LoadNextLevel {
+        
+        get
+        {
+           // yield return new WaitForSeconds(1);
+            
             Camera.SetActive(true);
             RoundText.enabled = true;
             yield return new WaitForSeconds(5);
