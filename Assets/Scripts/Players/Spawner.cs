@@ -17,9 +17,9 @@ public class Spawner : MonoBehaviour
     {
         gameMan = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         contMan = player.GetComponent<ControllerManager>();
-        Debug.Log(gameMan.round);
+        Debug.Log("round "+gameMan.round);
         hatTurn = gameMan.hatRound[gameMan.round];
-        Debug.Log("num " + hatTurn);
+        Debug.Log("hat " + hatTurn);
 
         if ((int)playerNum == hatTurn-1)
         {
