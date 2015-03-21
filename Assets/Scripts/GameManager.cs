@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
     public Text   RoundText;
 	public int[]  scoreTrack;
 
+
+
     GameObject Camera;
 
     public GameObject RManager;
@@ -44,7 +46,6 @@ public class GameManager : MonoBehaviour {
         if (round <= 4 && round >= 1)
         {
             setScore(getHat()-1);
-            Debug.Log(getHat());
         }
 	}
 	
