@@ -124,7 +124,7 @@ public class ControllerManager : MonoBehaviour
         Vector3 thrust = new Vector3(newPosX, 0, newPosZ);
         //float thrust = moveSpeed * dashBonus;
 
-        newPos = new Vector3(newPosX, newPos.y, newPosZ);
+        newPos = new Vector3(newPosX, 0, newPosZ);
 
         rb.velocity = thrust;
         //transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
