@@ -73,7 +73,6 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
-    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &304826607
 GameObject:
@@ -86,7 +85,7 @@ GameObject:
   - 114: {fileID: 304826610}
   - 114: {fileID: 304826609}
   - 114: {fileID: 304826608}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +144,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 801984407}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!1 &425721079
@@ -196,7 +196,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 801984407}
   - 212: {fileID: 801984406}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Menu_blank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,8 +235,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 304826611}
+  m_RootOrder: 0
 --- !u!1 &859563583
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,10 +350,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1893238374}
   m_RootOrder: 1
-  m_AnchorMin: {x: .5, y: .5}
-  m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 300}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 70.350029, y: -14.2999916}
+  m_SizeDelta: {x: -621.900085, y: -232.799988}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1063879129
 MonoBehaviour:
@@ -367,28 +367,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .196078435, g: .196078435, b: .196078435, a: 1}
+  m_Color: {r: .298039228, g: .443137258, b: .588235319, a: 1}
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 124f17ff0f960934393cb1059ef7b266, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 80
     m_Alignment: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "Ce jeux consiste d'un 3v1;\r\n\xC0 chaque tour, un des joueurs re\xE7oit
-    un chapeau.\r\nCelui-ci peut compter des points en se rendant aux hotspots situ\xE9s
-    \xE0 divers endroits sur le niveau.\r\nIl a 2 minutes pour compter le plus de
-    points possible.\r\n\r\n\r\nLes 3 autres joueurs ont pour but d'arr\xEAter le
-    cheapeau de compter des points.\r\nIl ont une abilet\xE9 qui r\xE9duit le nombre
-    de vies du chapeau.\r\nLorsque le chapeau n'a plus de vies, le tour termine et
-    quelqu'un d'autre devient le chapeau.\r\n\r\nAfin d'encourager le travail d'\xE9quipe,
-    un seul joueur ne peut pas \xE9liminer le chapeau par lui-m\xEAme.\r\nLa partie
-    termine apr\xE8s quatre tours."
+    m_LineSpacing: 1.74000001
+  m_Text: "CE JEUX CONSISTE D'UN 3V1;\n\xC0 CHAQUE TOUR, UN DES JOUEURS RE\xC7OIT
+    UN CHAPEAU.\nCELUI-CI PEUT COMPTER DES POINTS EN SE RENDANT AUX HOTSPOTS SITU\xC9S
+    \xC0 DIVERS ENDROITS SUR LE NIVEAU.\nIL A 2 MINUTES POUR COMPTER LE PLUS DE POINTS
+    POSSIBLE.\n\n\nLES 3 AUTRES JOUEURS ONT POUR BUT D'ARR\xCATER LE CHEAPEAU DE COMPTER
+    DES POINTS.\nIL ONT UNE ABILET\xC9 QUI R\xC9DUIT LE NOMBRE DE VIES DU CHAPEAU.\nLORSQUE
+    LE CHAPEAU N'A PLUS DE VIES, LE TOUR TERMINE ET QUELQU'UN D'AUTRE DEVIENT LE CHAPEAU.\n\nAFIN
+    D'ENCOURAGER LE TRAVAIL D'\xC9QUIPE, UN SEUL JOUEUR NE PEUT PAS \xC9LIMINER LE
+    CHAPEAU PAR LUI-M\xCAME.\nLA PARTIE TERMINE APR\xC8S QUATRE TOURS.\n"
 --- !u!222 &1063879130
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -509,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -609,7 +608,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2130711021}
+      - m_Target: {fileID: 425721080}
         m_MethodName: ChangeToScene
         m_Mode: 5
         m_Arguments:
@@ -668,42 +667,3 @@ RectTransform:
   m_AnchoredPosition: {x: -2, y: 43}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: .5, y: .5}
---- !u!1 &2130711020
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2130711022}
-  - 114: {fileID: 2130711021}
-  m_Layer: 0
-  m_Name: SceneManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2130711021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2130711020}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71043e179308b7e4fb15a36953823bdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &2130711022
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2130711020}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 796.688354, y: 383.766998, z: 11.25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5

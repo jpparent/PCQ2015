@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 	public Text   scoreText2;
 	public Text   scoreText3;
 	public Text   scoreText4;
-    public Text timerText;
+    public Text   RoundText;
 	public int[]  scoreTrack;
 
     GameObject Camera;
@@ -29,16 +29,17 @@ public class GameManager : MonoBehaviour {
 		resetScore();
         ShuffleHat();
         NextRound();
-
+        RoundText.text = "Round " + round.ToString();
 
 	}
 	
 	// Update is called once per frame
 	void Update() {
+        RoundText.text = "Round " + round.ToString();
 
         if (round > 4) 
         {
-            round = 1;
+            Application.LoadLevel("ScoreScene");
         }
         if (round <= 4 && round >= 1)
         {
@@ -100,17 +101,18 @@ public class GameManager : MonoBehaviour {
        }
       
        StartCoroutine(LoadNextLevel);
-        GameObject.FindGameObjectWithTag("RoundManager").GetComponent<RoundManager>().SetTimerText(timerText);
     }
 
     IEnumerator LoadNextLevel {
-
+        
         get
         {
+            RoundText.enabled = true;
             yield return new WaitForSeconds(5);
             Application.LoadLevelAdditiveAsync("Final");
             
             yield return new WaitForSeconds(2);
+            RoundText.enabled = false;
             Destroy(Camera);
 
         }

@@ -3220,7 +3220,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 548418760}
   m_Layer: 0
-  m_Name: Spawner
+  m_Name: HatSpawner
   m_TagString: Spawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3233,7 +3233,7 @@ Transform:
   m_PrefabInternal: {fileID: 1478721928}
   m_GameObject: {fileID: 548418759}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: -.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6969,7 +6969,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448890, guid: 019841a7b44357e4a933fa91d23fe3cb, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: -.5
       objectReference: {fileID: 0}
     - target: {fileID: 448890, guid: 019841a7b44357e4a933fa91d23fe3cb, type: 2}
       propertyPath: m_LocalPosition.z
@@ -6993,7 +6993,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 448890, guid: 019841a7b44357e4a933fa91d23fe3cb, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 148890, guid: 019841a7b44357e4a933fa91d23fe3cb, type: 2}
+      propertyPath: m_Name
+      value: HatSpawner
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 019841a7b44357e4a933fa91d23fe3cb, type: 2}
