@@ -11,6 +11,7 @@ public class ControllerManager : MonoBehaviour
     public float moveSpeed = 5f;
     public float dashBonus = 1f;
     public PlayerNumber playerNum;
+    Rigidbody rb;
     public int controllerNum;
     public int hotspot;
 
@@ -34,6 +35,7 @@ public class ControllerManager : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Use this for initialization
@@ -115,17 +117,21 @@ public class ControllerManager : MonoBehaviour
         animator.SetFloat("PlayerMovementSpeed", Mathf.Abs(axis));
 
 
-        float newPosX = newPos.x + (axisX * moveSpeed * dashBonus * Time.deltaTime);
-        float newPosZ = newPos.z + (axisY * moveSpeed * dashBonus * Time.deltaTime);
+        float newPosX = axisX * moveSpeed * dashBonus;
+        float newPosZ = axisY * moveSpeed * dashBonus;
+        Vector3 thrust = new Vector3(newPosX, 0, newPosZ);
+        //float thrust = moveSpeed * dashBonus;
 
         newPos = new Vector3(newPosX, newPos.y, newPosZ);
+
+        rb.velocity = thrust;
         //transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
         if (Mathf.Abs(axis) > 0.2f)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
         }
 
-        transform.position = newPos;
+        //transform.position = newPos;
     }
 
     void VibrationManager()
