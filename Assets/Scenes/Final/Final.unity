@@ -73,7 +73,6 @@ NavMeshSettings:
     minRegionArea: 2
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
-    tileSizeHint: 0
   m_NavMesh: {fileID: 0}
 --- !u!1 &15975552
 GameObject:
@@ -6583,6 +6582,7 @@ GameObject:
   - 224: {fileID: 1072420939}
   - 114: {fileID: 1072420938}
   - 223: {fileID: 1072420940}
+  - 114: {fileID: 1072420941}
   m_Layer: 0
   m_Name: RoundManager
   m_TagString: RoundManager
@@ -6647,6 +6647,20 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!114 &1072420941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1072420937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be991db8afad9de42ba101d7786aeb23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Life1: {fileID: 940626097}
+  Life2: {fileID: 1023087219}
+  Life3: {fileID: 1261118099}
 --- !u!1 &1080393019
 GameObject:
   m_ObjectHideFlags: 0
@@ -8649,7 +8663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47356885d15bf1b4b9ebf1ca2bb3c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 181062, guid: 31685837853afbd4d912f9a2ac8811ef, type: 2}
+  player: {fileID: 181062, guid: 8e99a0db9dbf3d741a88761203ea70fe, type: 2}
   gameMan: {fileID: 11431542, guid: 0dbfb68d94f660e458390f37b5f69059, type: 2}
   spawnPoint: {fileID: 2003378740}
   contMan: {fileID: 0}
@@ -8667,7 +8681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47356885d15bf1b4b9ebf1ca2bb3c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 181062, guid: 31685837853afbd4d912f9a2ac8811ef, type: 2}
+  player: {fileID: 181062, guid: 66c18577202b12f4c9e3428bcb4d16f9, type: 2}
   gameMan: {fileID: 11431542, guid: 0dbfb68d94f660e458390f37b5f69059, type: 2}
   spawnPoint: {fileID: 136909042}
   contMan: {fileID: 0}
@@ -8703,7 +8717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47356885d15bf1b4b9ebf1ca2bb3c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 181062, guid: 31685837853afbd4d912f9a2ac8811ef, type: 2}
+  player: {fileID: 181062, guid: 6b2064ea23bb5b74b81c06685535093b, type: 2}
   gameMan: {fileID: 11431542, guid: 0dbfb68d94f660e458390f37b5f69059, type: 2}
   spawnPoint: {fileID: 1683738265}
   contMan: {fileID: 0}
@@ -13667,8 +13681,8 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  ignoreReversedGraphics: 1
+  blockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295

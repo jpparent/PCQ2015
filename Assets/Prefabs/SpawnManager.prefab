@@ -42,7 +42,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47356885d15bf1b4b9ebf1ca2bb3c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 181062, guid: 31685837853afbd4d912f9a2ac8811ef, type: 2}
+  player: {fileID: 181062, guid: 6b2064ea23bb5b74b81c06685535093b, type: 2}
   gameMan: {fileID: 0}
   spawnPoint: {fileID: 0}
   contMan: {fileID: 0}
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47356885d15bf1b4b9ebf1ca2bb3c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 181062, guid: 31685837853afbd4d912f9a2ac8811ef, type: 2}
+  player: {fileID: 181062, guid: 66c18577202b12f4c9e3428bcb4d16f9, type: 2}
   gameMan: {fileID: 0}
   spawnPoint: {fileID: 0}
   contMan: {fileID: 0}
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47356885d15bf1b4b9ebf1ca2bb3c3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 181062, guid: 31685837853afbd4d912f9a2ac8811ef, type: 2}
+  player: {fileID: 181062, guid: 8e99a0db9dbf3d741a88761203ea70fe, type: 2}
   gameMan: {fileID: 0}
   spawnPoint: {fileID: 0}
   contMan: {fileID: 0}
