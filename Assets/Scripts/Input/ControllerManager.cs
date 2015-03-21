@@ -9,6 +9,7 @@ public class ControllerManager : MonoBehaviour
     private Animator animator;
 
     public float moveSpeed = 5f;
+    public float dashBonus = 1f;
     public PlayerNumber playerNum;
     public int controllerNum;
     public int hotspot;
@@ -29,7 +30,7 @@ public class ControllerManager : MonoBehaviour
     public float rightMotor;
     public float vibrationItensity;
     private bool canVibrate;
-    
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -114,8 +115,8 @@ public class ControllerManager : MonoBehaviour
         animator.SetFloat("PlayerMovementSpeed", Mathf.Abs(axis));
 
 
-        float newPosX = newPos.x + (axisX * moveSpeed * Time.deltaTime);
-        float newPosZ = newPos.z + (axisY * moveSpeed * Time.deltaTime);
+        float newPosX = newPos.x + (axisX * moveSpeed * dashBonus * Time.deltaTime);
+        float newPosZ = newPos.z + (axisY * moveSpeed * dashBonus * Time.deltaTime);
 
         newPos = new Vector3(newPosX, newPos.y, newPosZ);
         //transform.eulerAngles = new Vector3(transform.eulerAngles.x, Mathf.Atan2(axisX, axisY) * Mathf.Rad2Deg, transform.eulerAngles.z);
@@ -189,5 +190,10 @@ public class ControllerManager : MonoBehaviour
     void SetHat()
     {
         isHat = true;
+    }
+
+    public void setDashSpeed(float value)
+    {
+        dashBonus = value;
     }
 }

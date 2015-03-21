@@ -11,19 +11,26 @@ public class Chase : MonoBehaviour
     // isTackling -> l'evenement
     bool tackling;
     bool isTackling;
+    bool canHit;
+
+    public float dashBonus = 2.5f;
+    public float defaultBonus = 1f;
     
     // Use this for initialization
     void Awake()
     {
         tackling = false;
         isTackling = false;
+        canHit = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (tackling)
+        //if (tackling && canHit)
+         if(tackling)
         { StartCoroutine("Tackle"); }
+
     }
 
     public IEnumerator Tackle()
@@ -36,10 +43,11 @@ public class Chase : MonoBehaviour
         Debug.Log("start tackle");
         Animator anim = gameObject.GetComponent<Animator>();
         anim.SetBool("isKicking", true);
+        gameObject.SendMessage("setDashSpeed", dashBonus);
         //transform.position = newPos;
-
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         anim.SetBool("isKicking", false);
+        gameObject.SendMessage("setDashSpeed", defaultBonus);
         Debug.Log("done tackle");
 
        // transform.position = oldPos;
@@ -53,4 +61,8 @@ public class Chase : MonoBehaviour
 
     public bool IsTackling()
     { return isTackling; }
+
+    public void CanTakle(bool value) {
+        canHit = false;
+    }
 }
