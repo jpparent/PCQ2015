@@ -5,8 +5,13 @@ public class Hat : MonoBehaviour
 {
     public int currentLives;
     public GameObject lastHit;
+    private Animator animator;
 
     // Use this for initialization
+    void Start() {
+
+        animator = GetComponent<Animator>();
+    }
     void Awake()
     {
         currentLives = 3;
@@ -41,6 +46,7 @@ public class Hat : MonoBehaviour
 
     void Hit()
     {
+        animator.SetTrigger("PlayerIsHit");
         currentLives--;
         if (currentLives == 0)
         {
