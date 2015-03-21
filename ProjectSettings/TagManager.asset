@@ -9,6 +9,7 @@ TagManager:
   - Spawner
   - Menu
   - RoundText
+  - CameraMenu
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
