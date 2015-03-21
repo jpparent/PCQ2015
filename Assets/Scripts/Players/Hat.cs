@@ -59,9 +59,11 @@ public class Hat : MonoBehaviour
     void Dead()
     {
         //Does Dead stuff
-        Destroy(gameObject);
+        this.enabled = false;
         GM = GameObject.Find("GameManager").GetComponent<GameManager>();
         StartCoroutine(LoadNextLevel); 
+        
+       
     }
 
     IEnumerator LoadNextLevel 

@@ -8,7 +8,7 @@ public class RoundManager : MonoBehaviour {
     public Text timerText;
     public float timerCount;
     public string timerString;
-    public const int MAX_TIMER = 5;
+    public const int MAX_TIMER = 120;
     bool timerDone;
 
     //Hotspot
