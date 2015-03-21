@@ -2,9 +2,11 @@
 using UnityEngine;
 using System.Collections;
 
+public enum PlayerNumber { player_1, player_2, player_3, player_4 };
+
 public class ControllerManager : MonoBehaviour
 {
-    public enum PlayerNumber { player_1, player_2, player_3, player_4 };
+    
 
     private Animator animator;
 
