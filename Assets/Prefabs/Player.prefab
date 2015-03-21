@@ -1443,7 +1443,7 @@ MonoBehaviour:
   hotspot: 0
   chase: {fileID: 0}
   hat: {fileID: 0}
-  isHat: 1
+  isHat: 0
   nextTackle: 0
   tackleRate: 0
   deadzone: 0
