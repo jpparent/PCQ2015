@@ -88,18 +88,7 @@ public class GameManager : MonoBehaviour {
     public void NextRound()
     {
        round++;
-       GameObject[] AllSceneObjects = GameObject.FindObjectsOfType<GameObject>();
-
-       foreach (GameObject go in AllSceneObjects) {
-           if (go.activeInHierarchy && go.gameObject.tag != "GameController" && go.layer != LayerMask.NameToLayer("UI") && go.gameObject.tag != "MainCamera") 
-           {
-               Destroy(go);
-           }
-           else if (go.gameObject.tag == "MainCamera"){
-               Camera = go;
-
-           }
-       }
+       
       
        StartCoroutine(LoadNextLevel);
     }
@@ -108,13 +97,28 @@ public class GameManager : MonoBehaviour {
         
         get
         {
+            yield return new WaitForSeconds(1);
+            GameObject[] AllSceneObjects = GameObject.FindObjectsOfType<GameObject>();
+
+            foreach (GameObject go in AllSceneObjects)
+            {
+                if (go.activeInHierarchy && go.gameObject.tag != "GameController" && go.layer != LayerMask.NameToLayer("UI") && go.gameObject.tag != "MainCamera" && go.gameObject.tag != "CameraMenu")
+                {
+                    Destroy(go);
+                }
+                else if (go.gameObject.tag == "CameraMenu")
+                {
+                    Camera = go;
+
+                }
+            }
+            Camera.SetActive(true);
             RoundText.enabled = true;
             yield return new WaitForSeconds(5);
             Application.LoadLevelAdditiveAsync("Final");
-            
-            yield return new WaitForSeconds(2);
             RoundText.enabled = false;
-            Destroy(Camera);
+            yield return new WaitForSeconds(1);
+            Camera.SetActive(false);
 
         }
     }
