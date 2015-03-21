@@ -5,6 +5,7 @@ public class Hat : MonoBehaviour
 {
     public int currentLives;
     public GameObject lastHit;
+    GameManager GM;
 
     // Use this for initialization
     void Awake()
@@ -52,6 +53,17 @@ public class Hat : MonoBehaviour
     {
         //Does Dead stuff
         Destroy(gameObject);
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        StartCoroutine(LoadNextLevel); 
+    }
+
+    IEnumerator LoadNextLevel 
+    {
+        get {
+            yield return new WaitForSeconds(2);
+            GM.NextRound();
+            }
+    
     }
 }
 

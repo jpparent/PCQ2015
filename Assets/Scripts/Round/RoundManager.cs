@@ -9,13 +9,12 @@ public class RoundManager : MonoBehaviour {
     public float timerCount;
     public string timerString;
     public const int MAX_TIMER = 2;
+    bool timerDone;
 
     //Hotspot
     public HotSpot[] hotspots;
     public int[] hotspotIndex = {0,1,2,3};
     public int activeHotspotIndex = 0;
-
-    GameManager GManager;
 
 	// Use this for initialization
 	void Awake () {
@@ -23,12 +22,12 @@ public class RoundManager : MonoBehaviour {
         timerCount = MAX_TIMER;
         StartCoroutine(Timer());
         ChangeHotspot();
-        GManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     
     }
 	
     IEnumerator Timer()
     {  //triggers end of turn for hat
+        timerDone = false;
         while (timerCount > 0)
         {
             yield return new WaitForSeconds(1.0f);
@@ -36,12 +35,16 @@ public class RoundManager : MonoBehaviour {
             float minutes = Mathf.Floor(timerCount / 60);
             float seconds = timerCount % 60.0f; 
             timerText.text = "TIMER: " + string.Format(minutes + ":" + seconds);
-
-        } if (timerCount <= 0) { StopRound(); }
-        
-        
+            Debug.Log(timerCount);
+        } StopRound();
     }
 
+    void Update() 
+    {
+        Debug.Log(timerDone);
+    if (timerDone) { StopRound(); }
+    
+    }
     public void SetTimerText(Text timerT) 
     {
         this.timerText = timerT;
@@ -79,7 +82,7 @@ public class RoundManager : MonoBehaviour {
 
     void StopRound() {
 
-        GManager.NextRound();
+        GameObject.Find("GameManager").GetComponent<GameManager>().NextRound();
     }
 
 }
