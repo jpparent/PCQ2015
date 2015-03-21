@@ -17,3 +17,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Final/PauseMenu.unity
   - enabled: 1
     path: Assets/Scenes/Final/ScoreScene.unity
+  - enabled: 1
+    path: Assets/Scenes/Final/SceneCredits.unity
