@@ -15,6 +15,7 @@ public class Spawner : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        gameMan = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         contMan = player.GetComponent<ControllerManager>();
         Debug.Log(gameMan.round);
         hatTurn = gameMan.hatRound[gameMan.round];
