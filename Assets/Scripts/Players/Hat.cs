@@ -5,7 +5,9 @@ public class Hat : MonoBehaviour
 {
     public int currentLives;
     public GameObject lastHit;
+    GameManager GM;
     private Animator animator;
+
 
     // Use this for initialization
     void Start() {
@@ -58,6 +60,17 @@ public class Hat : MonoBehaviour
     {
         //Does Dead stuff
         Destroy(gameObject);
+        GM = GameObject.Find("GameManager").GetComponent<GameManager>();
+        StartCoroutine(LoadNextLevel); 
+    }
+
+    IEnumerator LoadNextLevel 
+    {
+        get {
+            yield return new WaitForSeconds(2);
+            GM.NextRound();
+            }
+    
     }
 }
 
