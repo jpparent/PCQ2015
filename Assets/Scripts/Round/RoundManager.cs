@@ -6,7 +6,7 @@ public class RoundManager : MonoBehaviour {
     
     //Timer
     public Text timerText;
-    public float timerCount;
+    public int timerCount;
     public string timerString;
     public const int MAX_TIMER = 120;
 
@@ -33,9 +33,8 @@ public class RoundManager : MonoBehaviour {
         {
             yield return new WaitForSeconds(1.0f);
             timerCount--;
-            float minutes = Mathf.Floor(timerCount / 60);
-            float seconds = timerCount % 60.0f; 
-            timerText.text = "Timer: " + string.Format(minutes + ":" + seconds);
+            //timerString = timerString.Format("{0:0}:{1:00}", Mathf.Floor(timerCount/60), timerCount % 60);
+            timerText.text = "Timer: " + timerCount;
         } //timer==0 -> end of turn
         StopRound();
         
