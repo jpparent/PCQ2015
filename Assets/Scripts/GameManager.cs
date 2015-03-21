@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour {
     public Text timerText;
 	public int[]  scoreTrack;
 
+    GameObject Camera;
+
     public GameObject RManager;
 
     //Round Data
@@ -25,21 +27,14 @@ public class GameManager : MonoBehaviour {
 		scoreArr = new Text[4] {scoreText1, scoreText2, scoreText3, scoreText4};
 		scoreTrack = new int[4] {0, 0, 0, 0};
 		resetScore();
-
         ShuffleHat();
+        NextRound();
 
 
 	}
 	
 	// Update is called once per frame
 	void Update() {
-
-        
-
-        if (XCI.GetButtonDown(XboxButton.B)) {
-
-            NextRound();
-        }
 
         if (round > 4) 
         {
@@ -50,7 +45,6 @@ public class GameManager : MonoBehaviour {
             setScore(getHat()-1);
             Debug.Log(getHat());
         }
-
 	}
 	
 	
@@ -91,25 +85,34 @@ public class GameManager : MonoBehaviour {
 
     public void NextRound()
     {
-        round++;
-        
+       round++;
        GameObject[] AllSceneObjects = GameObject.FindObjectsOfType<GameObject>();
 
        foreach (GameObject go in AllSceneObjects) {
-           if (go.activeInHierarchy && go.gameObject.tag != "GameController" && go.layer != LayerMask.NameToLayer("UI")) 
+           if (go.activeInHierarchy && go.gameObject.tag != "GameController" && go.layer != LayerMask.NameToLayer("UI") && go.gameObject.tag != "MainCamera") 
            {
                Destroy(go);
            }
+           else if (go.gameObject.tag == "MainCamera"){
+               Camera = go;
+
+           }
        }
-        
-       Application.LoadLevelAdditiveAsync("GabTest");
-      //  CreateRoundManager();
+      
+       StartCoroutine(LoadNextLevel);
+        GameObject.FindGameObjectWithTag("RoundManager").GetComponent<RoundManager>().SetTimerText(timerText);
     }
 
-    void CreateRoundManager() 
-    {
-        timerText.text = "Timer: 120";
-        RManager.GetComponent<RoundManager>().SetTimerText(timerText);
-      GameObject RM = Instantiate(RManager) as GameObject;   
+    IEnumerator LoadNextLevel {
+
+        get
+        {
+            yield return new WaitForSeconds(5);
+            Application.LoadLevelAdditiveAsync("Final");
+            
+            yield return new WaitForSeconds(2);
+            Destroy(Camera);
+
+        }
     }
 }

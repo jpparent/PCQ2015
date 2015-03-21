@@ -7,6 +7,11 @@ public class ChangeScene : MonoBehaviour {
 		Application.LoadLevel (sceneToChangeTo);
 	}
 
+    public void CallMenu(string menuToCall){
+
+        Application.LoadLevelAdditive(menuToCall);
+    
+    } 
 	public void exit() {
 		Application.Quit ();
 	}
