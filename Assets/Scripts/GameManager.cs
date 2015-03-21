@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour {
 	}
 	
 	void setScore(int currPlayer) {	//s'attend a recevoir le # du joueur
-		scoreArr[currPlayer].text = "score: " + scoreTrack[currPlayer];
+		scoreArr[currPlayer].text = "SCORE: " + scoreTrack[currPlayer];
 	}
 	
 	void resetScore() {
