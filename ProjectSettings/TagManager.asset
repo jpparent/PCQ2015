@@ -7,6 +7,8 @@ TagManager:
   - Hotspot
   - RoundManager
   - Spawner
+  - Menu
+  - RoundText
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

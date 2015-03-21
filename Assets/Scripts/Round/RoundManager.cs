@@ -8,7 +8,7 @@ public class RoundManager : MonoBehaviour {
     public Text timerText;
     public float timerCount;
     public string timerString;
-    public const int MAX_TIMER = 120;
+    public const int MAX_TIMER = 2;
 
     //Hotspot
     public HotSpot[] hotspots;
@@ -35,9 +35,10 @@ public class RoundManager : MonoBehaviour {
             timerCount--;
             float minutes = Mathf.Floor(timerCount / 60);
             float seconds = timerCount % 60.0f; 
-            timerText.text = "Timer: " + string.Format(minutes + ":" + seconds);
-        } //timer==0 -> end of turn
-        StopRound();
+            timerText.text = "TIMER: " + string.Format(minutes + ":" + seconds);
+
+        } if (timerCount <= 0) { StopRound(); }
+        
         
     }
 

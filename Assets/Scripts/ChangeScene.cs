@@ -15,4 +15,12 @@ public class ChangeScene : MonoBehaviour {
 	public void exit() {
 		Application.Quit ();
 	}
+
+    public void RemoveMenu() 
+    {
+        GameObject[] menuList =  GameObject.FindGameObjectsWithTag("Menu");
+        foreach (GameObject m in menuList) { Destroy(m); }
+        
+    
+    }
 }
