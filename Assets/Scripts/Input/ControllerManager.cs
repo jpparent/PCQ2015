@@ -121,7 +121,7 @@ public class ControllerManager : MonoBehaviour
 
         float newPosX = axisX * moveSpeed * dashBonus;
         float newPosZ = axisY * moveSpeed * dashBonus;
-        Vector3 thrust = new Vector3(newPosX, 0, newPosZ);
+        Vector3 thrust = new Vector3(newPosX, -1, newPosZ);
         //float thrust = moveSpeed * dashBonus;
 
         newPos = new Vector3(newPosX, 0, newPosZ);
