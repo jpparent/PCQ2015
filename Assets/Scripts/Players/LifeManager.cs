@@ -2,7 +2,8 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class LifeManager : MonoBehaviour {
+public class LifeManager : MonoBehaviour
+{
 
     public RectTransform Life1;
     public RectTransform Life2;
@@ -10,17 +11,19 @@ public class LifeManager : MonoBehaviour {
 
     int liveIndicator;
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
 
-        try{
-        liveIndicator = GameObject.FindGameObjectWithTag("PlayerHat").GetComponent<Hat>().currentLives;
+        try
+        {
+            liveIndicator = GameObject.FindGameObjectWithTag("PlayerHat").GetComponent<Hat>().currentLives;
         }
         catch
         {
             liveIndicator = 0;
         }
-        switch (liveIndicator) 
+        switch (liveIndicator)
         {
             case 0:
                 Life1.GetComponent<Image>().enabled = false;
@@ -42,9 +45,9 @@ public class LifeManager : MonoBehaviour {
                 Life2.GetComponent<Image>().enabled = true;
                 Life3.GetComponent<Image>().enabled = true;
                 break;
-        
-        
+
+
         }
 
-	}
+    }
 }
