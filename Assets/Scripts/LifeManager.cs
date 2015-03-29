@@ -8,19 +8,19 @@ public class LifeManager : MonoBehaviour {
     public RectTransform Life2;
     public RectTransform Life3;
 
-    int liveIndicator;
+    int lifeCounter;
 
 	// Update is called once per frame
 	void Update () {
 
         try{
-        liveIndicator = GameObject.FindGameObjectWithTag("PlayerHat").GetComponent<Hat>().currentLives;
+        lifeCounter = GameObject.FindGameObjectWithTag("PlayerHat").GetComponent<Hat>().currentLives;
         }
         catch
         {
-            liveIndicator = 0;
+            lifeCounter = 0;
         }
-        switch (liveIndicator) 
+        switch (lifeCounter) 
         {
             case 0:
                 Life1.GetComponent<Image>().enabled = false;
